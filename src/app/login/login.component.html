@@ -1,0 +1,69 @@
+<!-- <div class="container">
+  <div class="row mt-5">
+      <div class="col-md-8">
+        <img src="assets/loginSideBar.jpg" alt="" class="img-fluid">
+      </div>
+      <div class="col-md-4">
+          <form class="align-self-center">
+            <div class="form-group">
+              <label for="usuario">Usuario</label>
+              <input type="text" class="form-control" id="usuario">
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password">
+            </div>
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="recordar">
+              <label class="form-check-label" for="recordar">Recordarme</label>
+            </div>
+            <a routerLink="/menu" class="btn btn-primary btn-block">Ingresar</a>
+          </form>      
+      </div>
+    </div>
+</div> -->
+
+<!-- Main Content -->
+<div class="container-fluid">
+  <div class="row main-content bg-success text-center">
+    <div class="col-md-4 text-center company__info">
+      <span class="company__logo"><h2><span class="fa fa-beer fa-3x"></span></h2></span>
+      <h4 class="company_title">Licoreria BamBam</h4>
+    </div>
+    <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+      <div class="container-fluid">
+        <div class="row">
+          <h2 class="mt-2">INGRESO</h2>
+        </div>
+        <div class="row">
+          <form control="" class="form-group w-75">
+            <div class="row">
+              <input type="text" name="username" id="username" class="form__input" placeholder="Username">
+            </div>
+            <div class="row">
+              <!-- <span class="fa fa-lock"></span> -->
+              <input type="password" name="password" id="password" class="form__input" placeholder="Password">
+            </div>
+            <div class="row">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                  Recordar
+                </label>
+              </div>
+            </div>
+            <div class="row mt-4">
+              <!-- <input type="submit" value="Submit" class="btn btn-outline-primary btn-block"> -->
+              <button type="button" class="btn btn-primary btn-block" routerLink="/menu">
+                Ingresar
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="row">
+          <p>¿No tienes cuenta? <a href="#">Registrar aquí</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

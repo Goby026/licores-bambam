@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-md-10">
+    <h1>LISTA DE PRODUCTOS</h1>
+  </div>
+  <div class="col-md-2">
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-2">
+    <label for="desde">Ver por categoria</label>
+  </div>
+  <div class="col-md-2">
+    <select class="form-control">
+      <option *ngFor="let cat of categorias" [value]="cat.id">{{ cat.nombre }}</option>      
+    </select>
+  </div>
+</div>
+
+<div class="row mt-2">
+  <div class="col-md-2">
+    <label for="">Ver por producto</label>
+  </div>
+  <div class="col-md-6">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Buscar producto">
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-2">
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="chbHoy">
+      <label class="custom-control-label" for="chbHoy">Ver todo</label>
+    </div>
+  </div>
+
+  <div class="col-md-2">
+    <button class="btn btn-success btn-block">Mostrar productos</button>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-md-12 table-responsive mt-4">
+    <table class="table table-bordered">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Cod</th>
+          <th scope="col">Producto</th>
+          <th scope="col">Existencias</th>
+          <th scope="col">Categoria</th>
+          <th scope="col">Prec. Compra</th>
+          <th scope="col">Prec. Venta</th>
+          <th scope="col">Estado</th>
+          <th colspan="2" scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of productos">
+          <th scope="row">{{ producto.id }}</th>
+          <td>{{ producto.nombre }}</td>
+          <td>{{ producto.cantidad }}</td>
+          <td>{{ producto.categoria.nombre }}</td>
+          <td>{{ producto.precioCompra }}</td>
+          <td>{{ producto.precioVenta }}</td>
+          <td>ACTIVO</td>
+          <td><button class="btn btn-warning btn-sm" [routerLink]="['/altaProductos', producto.id]"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</button></td>
+          <td><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</button></td>
+        </tr>        
+        
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- botones -->
+<div class="row mt-4">
+  <div class="col-md-2"><button class="btn btn-danger btn-block">Cancelar</button></div>
+  <div class="col-md-8"></div>
+  <div class="col-md-2"><button class="btn btn-primary btn-block">Imprimir lista</button></div>
+</div>

@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/menu">LICORES BAM-BAM</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse " id="navbarNavDropdown">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Operación
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" routerLink="/ventas">Ventas</a>
+          <a class="dropdown-item" routerLink="/compras">Compras</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Almacen
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" routerLink="/categorias">Categorías</a>
+          <a class="dropdown-item" routerLink="/articulos">Gestión de Artículo</a>
+          <a class="dropdown-item" routerLink="/altaProductos">Gestión de Productos</a>
+          <a class="dropdown-item" routerLink="/lista-productos">Lista de Productos</a>
+          <a class="dropdown-item" routerLink="/movimientos">Movimientos</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Reportes
+        </a>
+        <div class="dropdown-menu">          
+          <a class="dropdown-item" routerLink="/lista-compras">Reporte de compras</a>
+          <a class="dropdown-item" routerLink="/lista-ventas">Reporte de ventas</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Configuración
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" routerLink="/usuarios">Usuario</a>          
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          ADMIN_01
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" routerLink="/login">Cerrar Sesion</a>          
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

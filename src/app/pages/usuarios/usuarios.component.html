@@ -1,0 +1,100 @@
+<div class="row">
+  <div class="col-md-10">
+    <h1>USUARIOS</h1>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group" *ngIf="!formRegistro">
+      <label for="btnAdduser" class="mr-2">Agregar usuario</label>
+      <button type="button" class="btn btn-secondary btn-circle" id="btnAdduser" (click)="formRegistro = true"><i
+          class="fa fa-plus" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-4 table-responsive">
+    <form [formGroup]="userForm" (ngSubmit)="registrar()" *ngIf="formRegistro">
+      <input type="hidden" formControlName="id">
+      <div class="form-group">
+        <label for="nombres">Nombres</label>
+        <input type="text" class="form-control" id="nombres" formControlName="nombres">
+      </div>
+      <div class="form-group">
+        <label for="apellidos">Apellidos</label>
+        <input type="text" class="form-control" id="apellidos" formControlName="apellidos">
+      </div>
+      <div class="form-group">
+        <label for="dni">Dni</label>
+        <input type="text" class="form-control" id="dni" formControlName="dni">
+      </div>
+      <div class="form-group">
+        <label for="usuario">Usuario</label>
+        <input type="text" class="form-control" id="usuario" formControlName="username">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" formControlName="password" *ngIf="!edit">
+        <input type="password" class="form-control" id="password" formControlName="password" readonly *ngIf="edit">
+      </div>
+      <div class="form-group">
+        <label for="perfil">Perfil</label>
+        <select name="" id="perfil" class="form-control" formControlName="role">
+          <option value="USER_ROLE">USUARIO</option>
+          <option value="ADMIN_ROLE">ADMINISTRADOR</option>
+        </select>
+      </div>
+      <!-- boton cancelar -->
+      <button type="button" class="btn btn-danger btn-block"
+        (click)="formRegistro = false; edit = false">Cancelar</button>
+      <!-- boton nuevo registro -->
+      <button type="button" class="btn btn-primary btn-block" (click)="reiniciarFormulario(); edit= false">Nuevo
+        Registro</button>
+      <!-- boton registrar -->
+      <button type="submit" class="btn btn-success btn-block" *ngIf="!edit">Registrar Usuario</button>
+      <!-- boton actualizar -->
+      <button type="button" class="btn btn-warning btn-block" *ngIf="edit" (click)="actualizar()">Actualizar
+        Usuario</button>
+    </form>
+  </div>
+
+  <div class="col-md-8 table-responsive">
+    <div class="input-group mb-3 mt-4">
+      <input type="text" class="form-control" placeholder="Buscar usuario">
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+      </div>
+    </div>
+    <table class="table table-bordered">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Cod</th>
+          <th scope="col">Nombres</th>
+          <th scope="col">Apellidos</th>
+          <th scope="col">Dni</th>
+          <th scope="col">Perfil</th>
+          <th colspan="3" scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of usuarios">
+          <th scope="row">{{ user.id }}</th>
+          <td>{{ user.nombres }}</td>
+          <td>{{ user.apellidos }}</td>
+          <td>{{ user.dni }}</td>
+          <td>{{ user.role }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm"><i class="fa fa-key" aria-hidden="true"></i> Password</button>
+          </td>
+          <td>
+            <button class="btn btn-warning btn-sm" (click)="editar(user) ; formRegistro = true; edit = true"><i
+                class="fa fa-pencil" aria-hidden="true"></i> Editar</button>
+          </td>
+          <td>
+            <button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

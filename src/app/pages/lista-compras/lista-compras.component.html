@@ -1,0 +1,107 @@
+<div class="row">
+  <div class="col-md-10">
+    <h1>LISTA DE COMPRAS</h1>
+  </div>
+  <div class="col-md-2">
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-1">
+    <label for="desde">Desde</label>
+  </div>
+  <div class="col-md-2">
+    <input type="date" class="form-control" id="desde">
+  </div>
+  <div class="col-md-1">
+    <label for="">Hasta</label>
+  </div>
+  <div class="col-md-2">
+    <input type="date" class="form-control">
+  </div>
+  <div class="col-md-2"></div>
+  <div class="col-md-1">
+    <label for="">Fecha específica</label>
+  </div>
+  <div class="col-md-2">
+    <input type="date" class="form-control">
+  </div>
+  <div class="col-md-1">
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="chbHoy">
+      <label class="custom-control-label" for="chbHoy">Compras de hoy</label>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-2">
+  <div class="col-md-2">
+    <label for="">Ver compras por producto</label>
+  </div>
+  <div class="col-md-8">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Buscar producto">
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <button class="btn btn-success btn-block">Mostrar compras</button>
+  </div>
+
+  <div class="col-md-12 table-responsive mt-4">
+    <table class="table table-bordered">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Fecha</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Producto</th>
+          <th scope="col">Costo</th>
+          <th scope="col">Proveedores</th>
+          <th scope="col">Sub-total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">08/09/2020</th>
+          <td>1</td>
+          <td>Stevia Boliviana 60g - Boliviana</td>
+          <td>16.00</td>
+          <td>Boliviana SAC</td>
+          <td>16.00</td>
+        </tr>
+        <tr>
+          <th scope="row">08/09/2020</th>
+          <td>1</td>
+          <td>Stevia Boliviana 60g - Boliviana</td>
+          <td>16.00</td>
+          <td>Boliviana SAC</td>
+          <td>16.00</td>
+        </tr>
+        <tr>
+          <th scope="row">08/09/2020</th>
+          <td>1</td>
+          <td>Stevia Boliviana 60g - Boliviana</td>
+          <td>16.00</td>
+          <td>Boliviana SAC</td>
+          <td>16.00</td>
+        </tr>
+        <tr>
+          <th scope="row">08/09/2020</th>
+          <td>1</td>
+          <td>Stevia Boliviana 60g - Boliviana</td>
+          <td>16.00</td>
+          <td>Boliviana SAC</td>
+          <td>16.00</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- botones -->
+<div class="row mt-4">
+  <div class="col-md-2"><button class="btn btn-danger btn-block">Cancelar</button></div>
+  <div class="col-md-8"></div>
+  <div class="col-md-2"><button class="btn btn-primary btn-block">Imprimir lista</button></div>
+</div>
