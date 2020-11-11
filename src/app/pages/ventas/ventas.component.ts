@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import moment from 'moment';
+// import moment from 'moment';
+import * as moment from 'moment';
+import Swal from 'sweetalert2';
 
 import { Producto } from 'src/app/models/Producto.model';
 import { ProductosService } from 'src/app/services/productos.service';
@@ -23,87 +25,113 @@ export class VentasComponent implements OnInit {
     total: 0.00,
     dcto: 0.00,
     incremento: 0.00,
-    user_id: null
-  }  
+    user_id: 1
+  }
 
-  constructor( private productosService: ProductosService, private productoToVenta: ProductoToVentaService ) { }
+  // banderas
+  ultimasVentas: boolean = false;
+
+  constructor(private productosService: ProductosService, private productoToVenta: ProductoToVentaService) { }
 
   ngOnInit(): void {
     this.venta.fecha_venta = moment().format('YYYY-MM-DD');
-    this.venta.user_id = localStorage.getItem('usuario');
-    console.log(this.venta);
+    // this.venta.user_id = localStorage.getItem('usuario');
+    // console.log(this.venta);
   }
 
-  listarProductos(){
+  listarProductos() {
     this.productosService.find(this.texto)
-    .subscribe( (resp: any)=>{
+      .subscribe((resp: any) => {        
 
-      this.productos = resp.productos;
+        this.productos = resp.productos.map( (item)=>{
+          item.unidades = item.cantidad;
+          item.cantidad = 1;
+          return item;
+        });
 
-    });
+      });
   }
 
-  agregarProducto(item: Producto){
+  agregarProducto(item: any) {
+
+    console.log(item);
 
     let producto: any = {
       nombre: item.nombre,
       unidad: item.unidad,
       precioVenta: item.precioVenta,
       precioCompra: item.precioCompra,
-      cantidad: item.cantidad,      
+      cantidad: item.cantidad,
+      unidades: item.unidades,
       stockMinimo: item.stockMinimo,
       stockMaximo: item.stockMaximo,
       stockReal: item.stockReal,
-      subtotal : item.cantidad * item.precioVenta,
+      subtotal: item.cantidad * item.precioVenta,
       id: item.id
     }
-    
+
     this.calculos(producto);
 
     this.addProductos.push(producto);
 
   }
 
-  calculos(producto: any){
+  calculos(producto: any) {
 
     this.venta.subtotal += producto.precioVenta - (producto.precioVenta * 0.18);
 
-    this.venta.igv +=  producto.precioVenta * 0.18;
+    this.venta.igv += producto.precioVenta * 0.18;
 
     this.venta.total += producto.subtotal;
 
   }
 
   // metodo par refrescar los calculos despues de quitar un item
-  leerProductos(){
+  leerProductos() {
 
     this.venta.subtotal = 0.00;
     this.venta.igv = 0.00;
     this.venta.total = 0.00;
 
-    this.addProductos.forEach( (e)=>{
+    this.addProductos.forEach((e) => {
       this.calculos(e);
-    } );
+    });
 
   }
 
   // registrar venta
-  registrar(){
-    if(this.addProductos.length == 0){
+  registrar() {
+    if (this.addProductos.length == 0) {
       alert('ingresar producto para venta');
       return;
     }
 
-    // console.log(this.addProductos);
-    // console.log(this.venta);
+    Swal.fire({
+      title: '¿Registrar venta?',
+      text: "Se registrará la venta con los productos indicados",
+      icon: 'info',
+      showCancelButton: true,
+      cancelButtonText: 'No',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.productoToVenta.create(this.addProductos, this.venta)
+          .subscribe((resp: any) => {
+            this.nuevaVenta();
+          }, err => console.log(err));
+        Swal.fire(
+          'Registrado!',
+          'Tu venta se registró correctamente.',
+          'success'
+        );
+      }
+    });
 
-    this.productoToVenta.create(this.addProductos, this.venta)
-    .subscribe( (resp:any)=>{
-      console.log(resp);
-    }, err => console.log(err) );
   }
 
-  nuevaVenta(){
+  nuevaVenta() {
     this.texto = '';
     this.productos = [];
     this.addProductos = [];
@@ -114,11 +142,11 @@ export class VentasComponent implements OnInit {
     this.venta.incremento = 0.00;
   }
 
-  quitarProducto ( item: any ) {
-    let i = this.addProductos.indexOf( item );
- 
-    if ( i !== -1 ) {
-        this.addProductos.splice( i, 1 );
+  quitarProducto(item: any) {
+    let i = this.addProductos.indexOf(item);
+
+    if (i !== -1) {
+      this.addProductos.splice(i, 1);
     }
 
     this.leerProductos();

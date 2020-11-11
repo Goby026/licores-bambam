@@ -127,7 +127,7 @@ export class AltaProductosComponent implements OnInit {
     }
 
     let producto: Producto = {
-      nombre: this.productoForm.value.nombre,
+      nombre: this.productoForm.value.nombre+' '+this.productoForm.value.unidad,
       unidad: this.productoForm.value.unidad,
       precioVenta: this.productoForm.value.precioVenta,
       precioCompra: this.productoForm.value.precioCompra,
@@ -161,7 +161,7 @@ export class AltaProductosComponent implements OnInit {
     }
 
     let producto: Producto = {
-      nombre: this.productoForm.value.nombre,
+      nombre: this.productoForm.value.nombre+' '+this.productoForm.value.unidad,
       unidad: this.productoForm.value.unidad,
       precioVenta: this.productoForm.value.precioVenta,
       precioCompra: this.productoForm.value.precioCompra,

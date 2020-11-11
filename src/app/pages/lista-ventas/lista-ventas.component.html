@@ -1,4 +1,5 @@
-<div class="row">
+<div class="animate__animated animate__fadeIn animate__delay-0.5s">
+  <div class="row">
     <div class="col-md-10">
       <h1>LISTA DE VENTAS</h1>
     </div>
@@ -24,7 +25,7 @@
       <label for="">Fecha específica</label>
     </div>
     <div class="col-md-2">
-      <input type="date" class="form-control">
+      <input type="date" class="form-control" [(ngModel)]="fecha">
     </div>
     <div class="col-md-1">
       <div class="custom-control custom-checkbox">
@@ -47,7 +48,7 @@
       </div>
     </div>
     <div class="col-md-2">
-      <button class="btn btn-success btn-block">Mostrar compras</button>
+      <button (click)="cargarVentas()" class="btn btn-success btn-block">Mostrar</button>
     </div>
   
     <div class="col-md-12 table-responsive mt-4">
@@ -55,19 +56,31 @@
         <thead class="thead-light">
           <tr>
             <th scope="col">Fecha</th>
-            <th scope="col">Cantidad</th>
+            <th scope="col">Unidades</th>
             <th scope="col">Producto</th>
-            <th scope="col">Costo</th>
+            <th scope="col">Precio</th>
             <th scope="col">Sub-total</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let venta of ventas">
-            <th scope="row">{{ venta.created_at }}</th>
-            <td>{{ venta.cantidad }}</td>
-            <td>{{ venta.producto.nombre }}</td>
-            <td>{{ venta.producto.precioVenta }}</td>
-            <td>{{ venta.subtotal }}</td>
+            <th scope="row">{{ venta.fecha }}</th>
+            <td>
+              <ul>
+                <li *ngFor="let p of venta.productos">
+                  {{ p.producto.cantidad }}
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li *ngFor="let p of venta.productos">
+                  {{ p.producto.nombre }}
+                </li>
+              </ul>
+            </td>
+            <td></td>
+            <td></td>
           </tr>
         </tbody>
       </table>
@@ -79,3 +92,4 @@
     <div class="col-md-8"></div>
     <div class="col-md-2"><button class="btn btn-primary btn-block">Imprimir lista</button></div>
   </div>
+</div>

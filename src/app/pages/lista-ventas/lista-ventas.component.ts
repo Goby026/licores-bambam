@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductoToVentaService } from 'src/app/services/producto-to-venta.service';
+import { VentasService } from 'src/app/services/ventas.service';
+
+import * as moment from 'moment';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-lista-ventas',
@@ -9,18 +12,27 @@ import { ProductoToVentaService } from 'src/app/services/producto-to-venta.servi
 export class ListaVentasComponent implements OnInit {
 
   ventas: any[] = [];
+  fecha: string = '';
 
-  constructor( private productoToVenta: ProductoToVentaService ) { }
+  constructor( private ventaService: VentasService ) { }
 
   ngOnInit(): void {
-    this.cargarVentas();
+    this.fecha = moment().format('YYYY-MM-DD');
   }
 
   cargarVentas(){
-    this.productoToVenta.read()
+
+    this.ventaService.findByDate(this.fecha)
     .subscribe( (resp: any)=>{
-      this.ventas = resp.prodToVentas;
-    }, err => console.log(err));
+      this.ventas = resp.ventas.map( (item)=>{
+        console.log(item.productoToVentas);
+        return {
+          fecha: item.fecha_venta,
+          cantidad: 1,
+          productos: item.productoToVentas
+        }
+      });
+    }, err => console.log('[ERROR]->',err));
   }
 
 }

@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+/* .container{
+    font-size: 11px !important;
+    padding: 1px !important;
+} */
+
+body{
+    background: whitesmoke !important;
+}
+
+table tr td, th{
+    padding: 0.5em !important;
+}
+
+input{
+    padding: 0.2em !important;
+}

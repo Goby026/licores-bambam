@@ -1,109 +1,148 @@
-<div class="row">
-  <div class="col-md-10">
-    <h1>REGISTRO DE VENTA</h1>
+<div class="animate__animated animate__fadeIn animate__delay-0.5s">
+  <div class="row">
+    <div class="col-md-10">
+      <h1>REGISTRO DE VENTA</h1>
+    </div>
+    <div class="col-md-2">
+      <!-- FECHA -->
+      <input [ngModel]="venta.fecha_venta" type="date" class="form-control" readonly>
+    </div>
   </div>
-  <div class="col-md-2">
-    <!-- FECHA -->
-    <input type="date" class="form-control" readonly>
+  <hr>
+  <div class="row p-2" style="min-height: 420px;">
+    <div class="col-md-4 table-responsive">
+      <div class="input-group mb-3">
+        <!-- BUSCAR PRODUCTO -->
+        <input type="text" class="form-control" placeholder="Buscar producto" [(ngModel)]="texto"
+          (keyup.enter)="listarProductos()">
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="button" (click)="listarProductos()"><i class="fa fa-search"
+              aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <!-- TABLA DE PRODUCTOS AGREGADOS PARA VENTA -->
+      <table class="table table-bordered mt-2">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Cod</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Producto</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producto of productos">
+            <th scope="row">{{ producto.id }}</th>
+            <td> <input type="number" class="form-control p-0 text-center" [(ngModel)]="producto.cantidad"></td>
+            <td>{{ producto.nombre }}</td>
+            <td><button class="btn btn-success btn-sm" (click)="agregarProducto(producto)">+</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-8">
+      <table class="table table-bordered mt-5">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Cod</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Importe</th>
+            <th scope="col">Dcto</th>
+            <th scope="col">Sub-total</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let added of addProductos">
+            <th scope="row">{{ added.id }}</th>
+            <td>{{ added.cantidad }}</td>
+            <td>{{ added.nombre }}</td>
+            <td>{{ added.precioVenta }}</td>
+            <td>{{ 0.00 }}</td>
+            <td>{{ added.subtotal }}</td>
+            <td class="text-center">
+              <button class="btn btn-danger btn-sm" (click)="quitarProducto(added)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
-<hr>
-<div class="row bg-secondary p-2" style="min-height: 420px;">
-  <div class="col-md-4 table-responsive">
-    <div class="input-group mb-3">
-      <!-- BUSCAR PRODUCTO -->
-      <input type="text" class="form-control" placeholder="Buscar producto" [(ngModel)]="texto" (keyup.enter)="listarProductos()">
-      <div class="input-group-append">
-        <button class="btn btn-primary" type="button" (click)="listarProductos()"><i class="fa fa-search" aria-hidden="true"></i></button>
+  <!-- indicadores -->
+  <div class="row mt-3">
+    <div class="col-md-8"></div>
+    <div class="col-md-1 text-right">Dcto</div>
+    <div class="col-md-1 p-0">
+      <input type="text" class="form-control w-100 p-0 text-center" [(ngModel)]="venta.dcto">
+    </div>
+    <div class="col-md-1 text-right">Sub-total</div>
+    <div class="col-md-1 p-0">
+      <input type="text" class="form-control w-100 p-0 text-center" [ngModel]="venta.subtotal.toFixed(2)" readonly>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-md-8"></div>
+    <div class="col-md-1 text-right">Incremento</div>
+    <div class="col-md-1 p-0">
+      <input type="text" class="form-control w-100 p-0 text-center" [(ngModel)]="venta.incremento">
+    </div>
+    <div class="col-md-1 text-right">IGV</div>
+    <div class="col-md-1 p-0">
+      <input type="text" class="form-control w-100 p-0 text-center" [ngModel]="venta.igv.toFixed(2)" readonly>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-md-10"></div>
+    <div class="col-md-1 text-right">TOTAL </div>
+    <div class="col-md-1 p-0">
+      <input type="text" class="form-control w-100 p-0 text-center" [ngModel]="venta.total.toFixed(2)" readonly>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-2"><button (click)="ultimasVentas=true" class="btn btn-warning btn-block">Ultimas ventas</button>
+    </div>
+    <div class="col-md-2"><button class="btn btn-primary btn-block" (click)="nuevaVenta()">Nueva Venta</button></div>
+    <div class="col-md-2">
+      <!-- <button class="btn btn-info btn-block" routerLink="/lista-ventas">Lista de Ventas</button> -->
+    </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-2"><button class="btn btn-success btn-block" (click)="registrar()">Registrar venta</button></div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div *ngIf="ultimasVentas" class="card text-white bg-info mb-3">
+        <div class="card-header p-1">
+          <div class="row">
+            <div class="col-md-11">ULTIMAS VENTAS </div>
+            <div class="col-md-1"><button (click)="ultimasVentas = false" class="btn btn-secondary btn-sm ml-3"><i
+                  class="fa fa-close"></i></button></div>
+          </div>
+        </div>
+        <div class="card-body bg-white text-dark p-1">
+          <h5 class="card-title">PRODUCTO</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+        </div>
+        <div class="card-body bg-white text-dark p-1">
+          <h5 class="card-title">PRODUCTO</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+        </div>
+        <div class="card-body bg-white text-dark p-1">
+          <h5 class="card-title">PRODUCTO</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+        </div>
+        <div class="card-body bg-white text-dark p-1">
+          <h5 class="card-title">PRODUCTO</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+        </div>
       </div>
     </div>
-    <!-- TABLA DE PRODUCTOS AGREGADOS PARA VENTA -->
-    <table class="table mt-2">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col">Cod</th>
-          <th scope="col">Cantidad</th>
-          <th scope="col">Producto</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let producto of productos">
-          <th scope="row">{{ producto.id }}</th>
-          <td> <input type="number" class="form-control p-0 text-center" [(ngModel)]="producto.cantidad"></td>
-          <td>{{ producto.nombre }}</td>
-          <td><button class="btn btn-success btn-sm" (click)="agregarProducto(producto)">+</button></td>
-        </tr>
-      </tbody>
-    </table>
   </div>
-
-  <div class="col-md-8">
-    <table class="table table-bordered">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col">Cod</th>
-          <th scope="col">Cantidad</th>
-          <th scope="col">Producto</th>
-          <th scope="col">Importe</th>
-          <th scope="col">Dcto</th>
-          <th scope="col">Sub-total</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let added of addProductos">
-          <th scope="row">{{ added.id }}</th>
-          <td>{{ added.cantidad }}</td>
-          <td>{{ added.nombre }}</td>
-          <td>{{ added.precioVenta }}</td>
-          <td>{{ 0.00 }}</td>
-          <td>{{ added.subtotal }}</td>
-          <td class="text-center">
-            <button class="btn btn-danger btn-sm" (click)="quitarProducto(added)">
-              <i class="fa fa-trash"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-<!-- indicadores -->
-<div class="row mt-3">
-  <div class="col-md-8"></div>
-  <div class="col-md-1 text-right">Dcto</div>
-  <div class="col-md-1 p-0">
-    <input type="text" class="form-control w-100 p-0 text-center" [(ngModel)]="venta.dcto">
-  </div>
-  <div class="col-md-1 text-right">Sub-total</div>
-  <div class="col-md-1 p-0">
-    <input type="text" class="form-control w-100 p-0 text-center" [ngModel]="venta.subtotal.toFixed(2)" readonly>
-  </div>
-</div>
-<div class="row mt-2">
-  <div class="col-md-8"></div>
-  <div class="col-md-1 text-right">Incremento</div>
-  <div class="col-md-1 p-0">
-    <input type="text" class="form-control w-100 p-0 text-center" [(ngModel)]="venta.incremento">
-  </div>
-  <div class="col-md-1 text-right">IGV</div>
-  <div class="col-md-1 p-0">
-    <input type="text" class="form-control w-100 p-0 text-center" [ngModel]="venta.igv.toFixed(2)" readonly>
-  </div>
-</div>
-<div class="row mt-2">
-  <div class="col-md-10"></div>
-  <div class="col-md-1 text-right">TOTAL </div>
-  <div class="col-md-1 p-0">
-    <input type="text" class="form-control w-100 p-0 text-center" [ngModel]="venta.total.toFixed(2)" readonly>
-  </div>
-</div>
-<div class="row mt-4">
-  <div class="col-md-2"><button class="btn btn-danger btn-block">Cancelar</button></div>
-  <div class="col-md-2"><button class="btn btn-primary btn-block" (click)="nuevaVenta()">Nueva Venta</button></div>
-  <div class="col-md-2"><button class="btn btn-warning btn-block" routerLink="/lista-ventas">Lista de Ventas</button>
-  </div>
-  <div class="col-md-4"></div>
-  <div class="col-md-2"><button class="btn btn-success btn-block" (click)="registrar()">Registrar venta</button></div>
 </div>

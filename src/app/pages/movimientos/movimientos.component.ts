@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MovimientosComponent implements OnInit {
 
+  nuevoIngreso: boolean = false;
+  nuevaSalida: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {

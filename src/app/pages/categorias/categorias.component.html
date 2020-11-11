@@ -1,11 +1,12 @@
-<div class="row">
+<div class="animate__animated animate__fadeIn animate__delay-0.5s">
+  <div class="row">
     <div class="col-md-10">
       <h1>CATEGORIAS</h1>
     </div>
     <div class="col-md-2">
       <label for="btnAddCat" class="mr-2">Agregar categoria</label>
-      <button type="button" class="btn btn-secondary btn-circle" id="btnAddCat" (click)="formulario = true" ><i class="fa fa-plus"
-          aria-hidden="true"></i>
+      <button type="button" class="btn btn-secondary btn-circle" id="btnAddCat" (click)="formulario = true"><i
+          class="fa fa-plus" aria-hidden="true"></i>
       </button>
     </div>
   </div>
@@ -13,7 +14,7 @@
   <div class="row">
     <div class="col-md-4 table-responsive">
       <!-- TODO : este formulario debe aparecer cuando se agregue un nuevo articulo (btnAddCat) -->
-      <form [formGroup]="categoriaForm" (ngSubmit)="registrar()" *ngIf="formulario" >
+      <form [formGroup]="categoriaForm" (ngSubmit)="registrar()" *ngIf="formulario">
         <input type="hidden" formControlName="id">
         <input type="hidden" formControlName="estado">
         <div class="form-group">
@@ -25,13 +26,15 @@
           <!-- <input type="password" class="form-control" id="exampleInputPassword1"> -->
           <textarea rows="4" class="form-control" formControlName="descripcion"></textarea>
         </div>
-        <button type="button" class="btn btn-danger btn-block" (click)="resetear(); editarCategoria = false; formulario=false">Cancelar</button>
+        <button type="button" class="btn btn-danger btn-block"
+          (click)="resetear(); editarCategoria = false; formulario=false">Cancelar</button>
         <button type="button" class="btn btn-primary btn-block" (click)="resetear()">Nuevo Registro</button>
         <button type="submit" class="btn btn-success btn-block" *ngIf="!editarCategoria">Registrar Categoría</button>
-        <button type="button" class="btn btn-warning btn-block" *ngIf="editarCategoria" (click)="actualizar()">Modificar Categoría</button>
+        <button type="button" class="btn btn-warning btn-block" *ngIf="editarCategoria" (click)="actualizar()">Modificar
+          Categoría</button>
       </form>
     </div>
-  
+
     <div class="col-md-8 table-responsive">
       <div class="input-group mb-3 mt-4">
         <input type="text" class="form-control" placeholder="Buscar artículo">
@@ -45,24 +48,27 @@
             <th scope="col">Cod</th>
             <th scope="col">Estado</th>
             <th scope="col">Categoría</th>
-            <th scope="col">Descripción</th>            
+            <th scope="col">Descripción</th>
             <th colspan="2" scope="col">Acciones</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let cat of categorias">
-            <th scope="row">{{ cat.id }}</th>    
+            <th scope="row">{{ cat.id }}</th>
             <td>{{ cat.estado }}</td>
             <td>{{ cat.nombre }}</td>
-            <td>{{ cat.descripcion }}</td>            
+            <td>{{ cat.descripcion }}</td>
             <td>
-                <button class="btn btn-warning btn-sm" (click)="editar(cat); editarCategoria = true"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</button>
+              <button class="btn btn-warning btn-sm" (click)="editar(cat); editarCategoria = true"><i
+                  class="fa fa-pencil" aria-hidden="true"></i> Editar</button>
             </td>
             <td>
-                <button class="btn btn-danger btn-sm" (click)="eliminar(cat.id)"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</button>
+              <button class="btn btn-danger btn-sm" (click)="eliminar(cat.id)"><i class="fa fa-trash"
+                  aria-hidden="true"></i> Eliminar</button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
+</div>

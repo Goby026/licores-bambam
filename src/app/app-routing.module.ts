@@ -15,6 +15,7 @@ import { MovimientosComponent } from "./pages/movimientos/movimientos.component"
 import { UsuariosComponent } from "./pages/usuarios/usuarios.component";
 import { VentasComponent } from "./pages/ventas/ventas.component";
 import { ErrorPageComponent } from "./shared/error-page/error-page.component";
+import { KardexComponent } from './pages/kardex/kardex.component';
 // import { FichaComponent } from './pages/mostrar-citas/ficha.component';
 
 const routes: Routes = [
@@ -22,18 +23,19 @@ const routes: Routes = [
     path: "",
     component: PagesComponent,
     children: [
-      { path: "menu", component: MenuComponent },
-      { path: "altaProductos", component: AltaProductosComponent },
-      { path: "altaProductos/:id", component: AltaProductosComponent },
-      { path: "articulos", component: ArticulosComponent },
-      { path: "categorias", component: CategoriasComponent },
-      { path: "compras", component: ComprasComponent },
-      { path: "lista-compras", component: ListaComprasComponent },
-      { path: "lista-productos", component: ListaProductosComponent },
-      { path: "lista-ventas", component: ListaVentasComponent },
-      { path: "movimientos", component: MovimientosComponent },
-      { path: "usuarios", component: UsuariosComponent },
-      { path: "ventas", component: VentasComponent },
+      { path: "menu", component: MenuComponent, data: { titulo: 'Menú' } },
+      { path: "altaProductos", component: AltaProductosComponent, data: { titulo: 'Alta de productos' } },
+      { path: "altaProductos/:id", component: AltaProductosComponent, data: { titulo: 'Editar producto' } },
+      { path: "articulos", component: ArticulosComponent, data: { titulo: 'Artículos' } },
+      { path: "categorias", component: CategoriasComponent, data: { titulo: 'Categorias' } },
+      { path: "compras", component: ComprasComponent, data: { titulo: 'Compras' } },
+      { path: "lista-compras", component: ListaComprasComponent, data: { titulo: 'Lista de compras' } },
+      { path: "lista-productos", component: ListaProductosComponent, data: { titulo: 'Lista de productos' } },
+      { path: "lista-ventas", component: ListaVentasComponent, data: { titulo: 'Lista de ventas' } },
+      { path: "movimientos", component: MovimientosComponent, data: { titulo: 'Movimientos' } },
+      { path: "usuarios", component: UsuariosComponent, data: { titulo: 'Usuarios' } },
+      { path: "ventas", component: VentasComponent, data: { titulo: 'Ventas' } },
+      { path: "kardex", component: KardexComponent, data: { titulo: 'Kardex' } },
       { path: '',   redirectTo: '/login', pathMatch: 'full' },
     ],
   },

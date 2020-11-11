@@ -1,126 +1,125 @@
-<div class="row">
-  <div class="col-md-10">
-    <h1>REGISTRO DE COMPRAS</h1>
+<div class="animate__animated animate__fadeIn animate__delay-0.5s">
+  <div class="row">
+    <div class="col-md-10">
+      <h1>REGISTRO DE COMPRAS</h1>
+    </div>
+    <div class="col-md-2">
+      <input type="date" class="form-control" [(ngModel)]="compra.fecha_compra">
+    </div>
   </div>
-  <div class="col-md-2">
-    <input type="date" class="form-control">
-  </div>
-</div>
-<hr>
-<div class="row">
-  <div class="col-md-12">
-    <div class="form-group row">
-      <label for="proveedor" class="col-sm-2 col-form-label">Proveedor</label>
-      <div class="col-sm-10">
-        <input type="password" class="form-control" id="proveedor">
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group row">
+        <label for="proveedor" class="col-sm-1 col-form-label">Proveedor</label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" id="proveedor" [(ngModel)]="compra.proveedor">
+        </div>
+        <label for="ruc" class="col-sm-1 col-form-label text-right">RUC</label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" id="ruc" [(ngModel)]="compra.ruc">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="documento" class="col-sm-1 col-form-label">Documento</label>
+        <div class="col-sm-5">
+          <select id="" class="form-control" [(ngModel)]="compra.documento">
+            <option value="BOLETA">BOLETA</option>
+            <option value="FACTURA">FACTURA</option>
+            <option value="NOTA-PEDIDO">NOTA-PEDIDO</option>
+            <option value="OTRO">OTRO</option>
+          </select>
+        </div>
+        <label for="serie" class="col-sm-1 col-form-label text-right">SERIE</label>
+        <div class="col-sm-2">
+          <input type="text" class="form-control" id="serie" [(ngModel)]="compra.serie">
+        </div>
+        <label for="numDoc" class="col-sm-1 col-form-label text-right">NRO</label>
+        <div class="col-sm-2">
+          <input type="text" class="form-control" id="numDoc" [(ngModel)]="compra.nro">
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-md-4 table-responsive">
-    <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="Buscar producto">
-      <div class="input-group-append">
-        <button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+  <hr>
+  <div class="row" style="min-height: 420px;">
+    <div class="col-md-4 table-responsive">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Buscar producto" [(ngModel)]="texto"
+          (keyup.enter)="listarProductos()">
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+        </div>
       </div>
+      <table class="table table-bordered mt-2">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Cod</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Producto</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producto of productos">
+            <th scope="row">{{producto.id}}</th>
+            <td> <input [(ngModel)]="producto.cantidad" type="text" class="form-control p-0 text-center"></td>
+            <td>{{ producto.nombre }}</td>
+            <td><button class="btn btn-success btn-sm" (click)="agregarProducto(producto)">+</button></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <table class="table table-bordered mt-2">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col">Cod</th>
-          <th scope="col">Cantidad</th>
-          <th scope="col">Producto</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td> <input type="text" class="form-control p-0 text-center"></td>
-          <td>Aceite de oliva extra virgen 100ml - Bello horizonte</td>
-          <td><button class="btn btn-success">+</button></td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td> <input type="text" class="form-control p-0 text-center"></td>
-          <td>Aceite de oliva extra virgen 100ml - Bello horizonte</td>
-          <td><button class="btn btn-success">+</button></td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td> <input type="text" class="form-control p-0 text-center"></td>
-          <td>Aceite de oliva extra virgen 100ml - Bello horizonte</td>
-          <td><button class="btn btn-success">+</button></td>
-        </tr>
-        <tr>
-          <th scope="row">4</th>
-          <td> <input type="text" class="form-control p-0 text-center"></td>
-          <td>Aceite de oliva extra virgen 100ml - Bello horizonte</td>
-          <td><button class="btn btn-success">+</button></td>
-        </tr>
-        <tr>
-          <th scope="row">5</th>
-          <td> <input type="text" class="form-control p-0 text-center"></td>
-          <td>Aceite de oliva extra virgen 100ml - Bello horizonte</td>
-          <td><button class="btn btn-success">+</button></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 
-  <div class="col-md-8 table-responsive">
-    <table class="table">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col">Cod</th>
-          <th scope="col">Cantidad</th>
-          <th scope="col">Descripción</th>
-          <th scope="col">Pre. U.</th>
-          <th scope="col">Dcto</th>
-          <th scope="col">Sub-total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">001</th>
-          <td>1</td>
-          <td>Aceite de oliva 100 ml - Bello horizonte</td>
-          <td>16.50</td>
-          <td>00.00</td>
-          <td>16.50</td>
-        </tr>
-
-      </tbody>
-    </table>
+    <div class="col-md-8 table-responsive" style="height: 500px; overflow: scroll;">
+      <table class="table table-bordered mt-5">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Cod</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Costo U.</th>
+            <th scope="col">Dcto</th>
+            <th scope="col" colspan="2">Sub-total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let added of addProductos">
+            <th scope="row">{{ added.id }}</th>
+            <td>{{ added.cantidad }}</td>
+            <td>{{ added.nombre }}</td>
+            <td><input type="text" class="form-control" [value]="added.precioCompra" [(ngModel)]="added.precioCompra" size="2"></td>
+            <td>
+              <input type="text" class="form-control" [value]="added.dcto" [(ngModel)]="added.dcto" size="2" (keyup)="descuento(added)">
+            </td>
+            <td>
+              <input type="text" class="form-control" [value]="added.subtotal" [(ngModel)]="added.subtotal" size="2" (keyup)="operar(added)">
+            </td>
+            <td class="text-center">
+              <button class="btn btn-danger btn-sm" (click)="quitarProducto(added)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
-<!-- indicadores -->
-<div class="row">
-  <div class="col-md-8"></div>
-  <div class="col-md-1 text-right">Dcto</div>
-  <div class="col-md-1 p-0"><input type="text" class="form-control w-100 p-0 text-center"></div>
-  <div class="col-md-1 text-right">Sub-total</div>
-  <div class="col-md-1 p-0"><input type="text" class="form-control w-100 p-0 text-center"></div>
-</div>
-<div class="row mt-2">
-  <div class="col-md-8"></div>
-  <div class="col-md-1 text-right">Incremento</div>
-  <div class="col-md-1 p-0"><input type="text" class="form-control w-100 p-0 text-center"></div>
-  <div class="col-md-1 text-right">IGV</div>
-  <div class="col-md-1 p-0"><input type="text" class="form-control w-100 p-0 text-center"></div>
-</div>
-<div class="row mt-2">
-  <div class="col-md-7"></div>
-  <div class="col-md-2 text-right">
-    <h5>IMPORTE TOTAL</h5>
+  <!-- indicadores -->
+  <div class="row mt-2">
+    <div class="col-md-8"></div>
+    <div class="col-md-2 text-right">
+      <h5>IMPORTE</h5>
+    </div>
+    <div class="col-md-2 p-0">
+      <input type="text" class="form-control w-100 p-0 text-center" [ngModel]="compra.total" readonly>
+    </div>
   </div>
-  <div class="col-md-3 p-0"><input type="text" class="form-control w-100 p-0 text-center"></div>
-</div>
-<div class="row mt-4">
-  <div class="col-md-2"><button class="btn btn-danger btn-block">Cancelar</button></div>
-  <div class="col-md-2"><button class="btn btn-primary btn-block">Nueva Compra</button></div>
-  <div class="col-md-2"><button class="btn btn-warning btn-block" routerLink="/lista-compras">Lista de Compras</button></div>
-  <div class="col-md-4"></div>
-  <div class="col-md-2"><button class="btn btn-success btn-block">Registrar Compra</button></div>
+  <div class="row mt-4">
+    <div class="col-md-2"><button class="btn btn-primary btn-block">Nueva Compra</button></div>
+    <div class="col-md-2"><button class="btn btn-warning btn-block" routerLink="/lista-compras">Ver Compras</button>
+    </div>
+    <div class="col-md-6"></div>
+    <div class="col-md-2"><button class="btn btn-success btn-block" (click)="registrar()">Registrar Compra</button></div>
+  </div>
 </div>

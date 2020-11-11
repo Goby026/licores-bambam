@@ -1,66 +1,74 @@
-<div class="row">
-  <div class="col-md-10">
-    <h1>ARTÍCULOS</h1>
+<div class="animate__animated animate__fadeIn animate__delay-0.5s">
+  <div class="row">
+    <div class="col-md-10">
+      <h1>ARTÍCULOS</h1>
+    </div>
+    <div class="col-md-2">
+      <label for="btnAddArt" class="mr-2">Agregar articulo</label>
+      <button type="button" class="btn btn-secondary btn-circle" id="btnAddArt" (click)="formulario = true"><i
+          class="fa fa-plus" aria-hidden="true"></i>
+      </button>
+    </div>
   </div>
-  <div class="col-md-2">
-    <label for="btnAddArt" class="mr-2">Agregar articulo</label>
-    <button type="button" class="btn btn-secondary btn-circle" id="btnAddArt" (click)="formulario = true"><i
-        class="fa fa-plus" aria-hidden="true"></i>
-    </button>
-  </div>
-</div>
-<hr>
-<div class="row">
-  <div class="col-md-4 table-responsive">
-    <!-- TODO : este formulario debe aparecer cuando se agregue un nuevo articulo (btnAddArt) -->
-    <form [formGroup]="articulosForm" (ngSubmit)="registrar()" *ngIf="formulario">
-      <input type="hidden" formControlName="id">
-      <input type="hidden" formControlName="estado">
-      <div class="form-group">
-        <label for="txtArticulo">Nombre de artículo</label>
-        <input type="text" class="form-control" id="txtArticulo" formControlName="nombre">
+  <hr>
+  <div class="row">
+    <div class="col-md-4 table-responsive">
+      <!-- TODO : este formulario debe aparecer cuando se agregue un nuevo articulo (btnAddArt) -->
+      <form [formGroup]="articulosForm" (ngSubmit)="registrar()" *ngIf="formulario">
+        <input type="hidden" formControlName="id">
+        <input type="hidden" formControlName="estado">
+        <div class="form-group">
+          <label for="txtArticulo">Nombre de artículo</label>
+          <input type="text" class="form-control" id="txtArticulo" formControlName="nombre">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Descripción</label>
+          <!-- <input type="password" class="form-control" id="exampleInputPassword1"> -->
+          <textarea rows="4" class="form-control" formControlName="descripcion"></textarea>
+        </div>
+        <button type="button" class="btn btn-danger btn-block"
+          (click)="resetear(); formulario = false; modificar= false">Cancelar</button>
+        <button type="button" class="btn btn-primary btn-block" (click)="resetear(); modificar = false">Nuevo
+          Registro</button>
+        <button *ngIf="!modificar" type="submit" class="btn btn-success btn-block">Registrar Articulo</button>
+        <button *ngIf="modificar" type="button" class="btn btn-warning btn-block" (click)="actualizar()">Modificar
+          Articulo</button>
+      </form>
+    </div>
+
+    <div class="col-md-8 table-responsive">
+      <div class="input-group mb-3 mt-4">
+        <input type="text" class="form-control" placeholder="Buscar artículo">
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Descripción</label>
-        <!-- <input type="password" class="form-control" id="exampleInputPassword1"> -->
-        <textarea rows="4" class="form-control" formControlName="descripcion"></textarea>
-      </div>
-      <button type="button" class="btn btn-danger btn-block" (click)="resetear(); formulario = false; modificar= false">Cancelar</button>
-      <button type="button" class="btn btn-primary btn-block" (click)="resetear(); modificar = false">Nuevo Registro</button>
-      <button *ngIf="!modificar" type="submit" class="btn btn-success btn-block">Registrar Articulo</button>
-      <button *ngIf="modificar" type="button" class="btn btn-warning btn-block" (click)="actualizar()">Modificar Articulo</button>
-    </form>
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Cod</th>
+            <th scope="col">Articulo</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Estado</th>
+            <th colspan="2" scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let art of articulos">
+            <th scope="row">{{ art.id }}</th>
+            <td>{{ art.nombre }}</td>
+            <td>{{ art.descripcion }}</td>
+            <td>{{ art.estado }}</td>
+            <td><button class="btn btn-warning btn-sm" (click)="editar(art); formulario=true; modificar = true"><i
+                  class="fa fa-pencil" aria-hidden="true"></i> Editar</button>
+            </td>
+            <td><button class="btn btn-danger btn-sm" (click)="eliminar(art.id)"><i class="fa fa-trash"
+                  aria-hidden="true"></i> Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
-  <div class="col-md-8 table-responsive">
-    <div class="input-group mb-3 mt-4">
-      <input type="text" class="form-control" placeholder="Buscar artículo">
-      <div class="input-group-append">
-        <button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
-      </div>
-    </div>
-    <table class="table table-bordered">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col">Cod</th>
-          <th scope="col">Articulo</th>
-          <th scope="col">Descripción</th>
-          <th scope="col">Estado</th>
-          <th colspan="2" scope="col">Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let art of articulos">
-          <th scope="row">{{ art.id }}</th>
-          <td>{{ art.nombre }}</td>
-          <td>{{ art.descripcion }}</td>
-          <td>{{ art.estado }}</td>
-          <td><button class="btn btn-warning btn-sm" (click)="editar(art); formulario=true; modificar = true"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</button>
-          </td>
-          <td><button class="btn btn-danger btn-sm" (click)="eliminar(art.id)"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 </div>

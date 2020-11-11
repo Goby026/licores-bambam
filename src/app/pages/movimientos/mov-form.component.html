@@ -1,0 +1,86 @@
+<div class="card text-white mb-3" 
+    [ngClass]="{'bg-success': tipoMovimiento == 1,
+    'bg-danger': tipoMovimiento == 2}">
+  <div class="card-header p-1 text-center">
+    <div *ngIf="tipoMovimiento == 1; else elseBlock">
+      <h3>INGRESOS</h3>
+      <button (click)="form = !form">Nuevo</button>
+    </div>
+    <ng-template #elseBlock>
+      <h3>SALIDAS</h3>
+      <button (click)="form = !form">Nuevo</button>
+    </ng-template>
+    
+  </div>
+  <div class="card-body bg-white text-dark">
+    <form *ngIf="form">
+      <div class="form-group">
+        <label for="productos">Producto</label>
+        <div class="ng-autocomplete" style="width: 100%;">
+          <ng-autocomplete 
+          [data]="productos" 
+          [searchKeyword]="keyword" (selected)='selectEvent($event)'
+            (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' 
+            [itemTemplate]="itemTemplate"
+            [notFoundTemplate]="notFoundTemplate"
+            [initialValue]="">
+          </ng-autocomplete>
+          <ng-template #itemTemplate let-item>
+            <a [innerHTML]="item.nombre"></a>
+          </ng-template>
+
+          <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="noPro"></div>
+          </ng-template>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="cantidad">Cantidad</label>
+        <input type="text" class="form-control" id="cantidad">
+      </div>
+      <div class="form-group">
+        <label for="importe">Importe</label>
+        <input type="text" class="form-control" id="importe">
+      </div>
+      <div class="form-group">
+        <label for="observacion">Observación</label>
+        <textarea class="form-control" id="observacion" rows="4"></textarea>
+      </div>
+
+      <div *ngIf="tipoMovimiento == 1; else btnSalida">
+        <button type="submit" class="btn btn-primary btn-block">Dar ingreso</button>
+      </div>
+      <ng-template #btnSalida>
+        <button type="submit" class="btn btn-warning btn-block">Dar salida</button>
+      </ng-template>
+      
+      
+    </form>
+  </div>
+  <div class="card-footer bg-light text-dark">    
+    <div *ngIf="tipoMovimiento == 1; else ultimos">
+      <h5 class="card-title">Últimos ingresos</h5>
+    </div>
+    <ng-template #ultimos>
+      <h5 class="card-title">Últimas salidas</h5>
+    </ng-template>
+    <table class="table table-bordered w-100">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Importe</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cerveza Cusqueña</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

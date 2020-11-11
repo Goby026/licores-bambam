@@ -1,1 +1,23 @@
-<p>movimientos works!</p>
+<div class="animate__animated animate__fadeIn animate__delay-0.5s">
+
+  <div class="row">
+    <div class="col-md-6">
+      <button class="btn btn-success btn-block" (click)="nuevoIngreso = !nuevoIngreso">Nuevo Ingreso</button>    
+    </div>
+    <div class="col-md-6">
+    <button class="btn btn-danger btn-block" (click)="nuevaSalida = !nuevaSalida">Nueva Salida</button>
+    </div>
+  </div>
+
+  <div class="row">    
+    <div class="col-md-6 p-1">      
+      <app-mov-form *ngIf="nuevoIngreso" tipoMovimiento=1></app-mov-form>
+    </div>
+    <div class="col-md-6 p-1">
+      <app-mov-form *ngIf="nuevaSalida" tipoMovimiento=2></app-mov-form>
+    </div>
+  </div>
+
+  <button class="btn btn-info" routerLink="/kardex">KARDEX</button>
+
+</div>

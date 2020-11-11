@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 // modulo de rutas
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +23,9 @@ import { ListaProductosComponent } from './pages/lista-productos/lista-productos
 import { CategoriasComponent } from './pages/categorias/categorias.component';
 import { MovimientosComponent } from './pages/movimientos/movimientos.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
+import { KardexComponent } from './pages/kardex/kardex.component';
+import { MovFormComponent } from './pages/movimientos/mov-form.component';
+import { BreadcrumbsComponent } from './shared/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
   declarations: [
@@ -40,14 +44,18 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
     ListaProductosComponent,
     CategoriasComponent,
     MovimientosComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    KardexComponent,
+    MovFormComponent,
+    BreadcrumbsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AutocompleteLibModule
   ],
   providers: [],
   bootstrap: [AppComponent]
