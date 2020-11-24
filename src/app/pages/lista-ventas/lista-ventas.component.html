@@ -34,7 +34,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="row mt-2">
     <div class="col-md-2">
       <label for="">Ver por producto</label>
@@ -50,8 +50,8 @@
     <div class="col-md-2">
       <button (click)="cargarVentas()" class="btn btn-success btn-block">Mostrar</button>
     </div>
-  
-    <div class="col-md-12 table-responsive mt-4">
+
+    <div class="col-md-12 table-responsive mt-4 p-4" id="contentToConvert">
       <table class="table table-bordered">
         <thead class="thead-light">
           <tr>
@@ -90,6 +90,6 @@
   <div class="row mt-4">
     <div class="col-md-2"><button class="btn btn-danger btn-block">Cancelar</button></div>
     <div class="col-md-8"></div>
-    <div class="col-md-2"><button class="btn btn-primary btn-block">Imprimir lista</button></div>
+    <div class="col-md-2"><button class="btn btn-primary btn-block" (click)="verReporte()">Imprimir lista</button></div>
   </div>
 </div>

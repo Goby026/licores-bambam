@@ -47,8 +47,6 @@ export class ComprasComponent implements OnInit {
 
   agregarProducto(item: any) {
 
-    console.log(item);
-
     let producto: any = {
       nombre: item.nombre,
       unidad: item.unidad,

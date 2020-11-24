@@ -43,8 +43,8 @@
           <button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
         </div>
       </div>
-      <table class="table table-bordered">
-        <thead class="thead-light">
+      <table class="table">
+        <thead class="thead-dark">
           <tr>
             <th scope="col">Cod</th>
             <th scope="col">Articulo</th>
@@ -54,20 +54,24 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let art of articulos">
+          <tr *ngFor="let art of articulos| paginate: { itemsPerPage: count, currentPage: p }">
             <th scope="row">{{ art.id }}</th>
             <td>{{ art.nombre }}</td>
             <td>{{ art.descripcion }}</td>
             <td>{{ art.estado }}</td>
             <td><button class="btn btn-warning btn-sm" (click)="editar(art); formulario=true; modificar = true"><i
-                  class="fa fa-pencil" aria-hidden="true"></i> Editar</button>
+                  class="fa fa-pencil" aria-hidden="true"></i> </button>
             </td>
             <td><button class="btn btn-danger btn-sm" (click)="eliminar(art.id)"><i class="fa fa-trash"
-                  aria-hidden="true"></i> Eliminar</button>
+                  aria-hidden="true"></i></button>
             </td>
           </tr>
         </tbody>
       </table>
+      <!--Including the pagination control.-->
+      <div class="text-right">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
     </div>
   </div>
 

@@ -14,6 +14,10 @@ export class ListaProductosComponent implements OnInit {
   productos: Producto[] = [];
   categorias: Categoria[] = [];
 
+  // Pagination parameters.
+  p: number = 1;
+  count: number = 8;
+
   constructor( private productosService: ProductosService, private categoriaService: CategoriasService ) { }
 
   ngOnInit(): void {
@@ -24,8 +28,7 @@ export class ListaProductosComponent implements OnInit {
   listarProductos(){
     this.productosService.read()
     .subscribe( (resp: any)=>{
-      console.log(resp);
-      this.productos = resp.productos;
+      this.productos = resp;
     });
   }
 

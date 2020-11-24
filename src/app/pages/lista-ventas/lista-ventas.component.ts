@@ -14,25 +14,28 @@ export class ListaVentasComponent implements OnInit {
   ventas: any[] = [];
   fecha: string = '';
 
-  constructor( private ventaService: VentasService ) { }
+  constructor(private ventaService: VentasService) { }
 
   ngOnInit(): void {
     this.fecha = moment().format('YYYY-MM-DD');
   }
 
-  cargarVentas(){
+  cargarVentas() {
 
     this.ventaService.findByDate(this.fecha)
-    .subscribe( (resp: any)=>{
-      this.ventas = resp.ventas.map( (item)=>{
-        console.log(item.productoToVentas);
-        return {
-          fecha: item.fecha_venta,
-          cantidad: 1,
-          productos: item.productoToVentas
-        }
-      });
-    }, err => console.log('[ERROR]->',err));
+      .subscribe((resp: any) => {
+        this.ventas = resp.ventas.map((item) => {
+          console.log(item.productoToVentas);
+          return {
+            fecha: item.fecha_venta,
+            cantidad: 1,
+            productos: item.productoToVentas
+          }
+        });
+      }, err => console.log('[ERROR]->', err));
+  }
+
+  verReporte() {
   }
 
 }

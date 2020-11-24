@@ -2,22 +2,26 @@
 
   <div class="row">
     <div class="col-md-6">
-      <button class="btn btn-success btn-block" (click)="nuevoIngreso = !nuevoIngreso">Nuevo Ingreso</button>    
+      <button class="btn btn-success btn-block" (click)="nuevoIngreso = !nuevoIngreso">Nuevo Ingreso</button>
     </div>
     <div class="col-md-6">
     <button class="btn btn-danger btn-block" (click)="nuevaSalida = !nuevaSalida">Nueva Salida</button>
     </div>
   </div>
 
-  <div class="row">    
-    <div class="col-md-6 p-1">      
+  <div class="row mt-2">
+    <div class="col-md-6">
       <app-mov-form *ngIf="nuevoIngreso" tipoMovimiento=1></app-mov-form>
     </div>
-    <div class="col-md-6 p-1">
+    <div class="col-md-6">
       <app-mov-form *ngIf="nuevaSalida" tipoMovimiento=2></app-mov-form>
     </div>
   </div>
 
+  <button class="btn btn-info">Registrar ingreso</button>
+  <button class="btn btn-info">Registrar salida</button>
+
   <button class="btn btn-info" routerLink="/kardex">KARDEX</button>
+  <button class="btn btn-warning" routerLink="/lista-movimientos">Registro de movimientos</button>
 
 </div>

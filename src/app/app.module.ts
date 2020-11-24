@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 // modulo de rutas
 import { AppRoutingModule } from './app-routing.module';
@@ -26,6 +27,8 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { KardexComponent } from './pages/kardex/kardex.component';
 import { MovFormComponent } from './pages/movimientos/mov-form.component';
 import { BreadcrumbsComponent } from './shared/breadcrumbs/breadcrumbs.component';
+import { ListaMovimientosComponent } from './pages/lista-movimientos/lista-movimientos.component';
+import { EmpresaComponent } from './pages/empresa/empresa.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +50,9 @@ import { BreadcrumbsComponent } from './shared/breadcrumbs/breadcrumbs.component
     UsuariosComponent,
     KardexComponent,
     MovFormComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    ListaMovimientosComponent,
+    EmpresaComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +60,8 @@ import { BreadcrumbsComponent } from './shared/breadcrumbs/breadcrumbs.component
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AutocompleteLibModule
+    AutocompleteLibModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

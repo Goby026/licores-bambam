@@ -1,5 +1,11 @@
 <div class="animate__animated animate__fadeIn animate__delay-0.5s">
   <div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-info">REGISTRAR COMPRA</button>
+      <button class="btn btn-info">REGISTRAR ORDEN DE COMPRA</button>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-md-10">
       <h1>REGISTRO DE COMPRAS</h1>
     </div>
@@ -51,15 +57,15 @@
           <button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
         </div>
       </div>
-      <table class="table table-bordered mt-2">
-        <thead class="thead-light">
+      <table class="table mt-2">
+        <!-- <thead class="thead-light">
           <tr>
             <th scope="col">Cod</th>
             <th scope="col">Cantidad</th>
             <th scope="col">Producto</th>
             <th></th>
           </tr>
-        </thead>
+        </thead> -->
         <tbody>
           <tr *ngFor="let producto of productos">
             <th scope="row">{{producto.id}}</th>
@@ -71,9 +77,9 @@
       </table>
     </div>
 
-    <div class="col-md-8 table-responsive" style="height: 500px; overflow: scroll;">
-      <table class="table table-bordered mt-5">
-        <thead class="thead-light">
+    <div class="col-md-8 table-responsive border p-0" style="height: 500px; overflow: scroll;">
+      <table class="table">
+        <thead class="thead-dark">
           <tr>
             <th scope="col">Cod</th>
             <th scope="col">Cantidad</th>

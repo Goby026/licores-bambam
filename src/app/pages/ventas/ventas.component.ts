@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { Producto } from 'src/app/models/Producto.model';
 import { ProductosService } from 'src/app/services/productos.service';
 import { ProductoToVentaService } from 'src/app/services/producto-to-venta.service';
+import { VentasService } from 'src/app/services/ventas.service';
 
 @Component({
   selector: 'app-ventas',
@@ -40,21 +41,20 @@ export class VentasComponent implements OnInit {
   }
 
   listarProductos() {
-    this.productosService.find(this.texto)
-      .subscribe((resp: any) => {        
 
-        this.productos = resp.productos.map( (item)=>{
-          item.unidades = item.cantidad;
-          item.cantidad = 1;
-          return item;
-        });
+    if(this.texto.trim() == ''){
+      return;
+    }
+
+    this.productosService.find(this.texto)
+      .subscribe((resp: any) => {
+
+        this.productos = resp;
 
       });
   }
 
   agregarProducto(item: any) {
-
-    console.log(item);
 
     let producto: any = {
       nombre: item.nombre,
@@ -151,6 +151,5 @@ export class VentasComponent implements OnInit {
 
     this.leerProductos();
   }
-
 
 }

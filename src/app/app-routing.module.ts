@@ -16,7 +16,8 @@ import { UsuariosComponent } from "./pages/usuarios/usuarios.component";
 import { VentasComponent } from "./pages/ventas/ventas.component";
 import { ErrorPageComponent } from "./shared/error-page/error-page.component";
 import { KardexComponent } from './pages/kardex/kardex.component';
-// import { FichaComponent } from './pages/mostrar-citas/ficha.component';
+import { ListaMovimientosComponent } from './pages/lista-movimientos/lista-movimientos.component';
+import { EmpresaComponent } from './pages/empresa/empresa.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,8 @@ const routes: Routes = [
       { path: "usuarios", component: UsuariosComponent, data: { titulo: 'Usuarios' } },
       { path: "ventas", component: VentasComponent, data: { titulo: 'Ventas' } },
       { path: "kardex", component: KardexComponent, data: { titulo: 'Kardex' } },
+      { path: "lista-movimientos", component: ListaMovimientosComponent, data: { titulo: 'Lista de movimientos' } },
+      { path: "empresa", component: EmpresaComponent, data: { titulo: 'Empresa' } },
       { path: '',   redirectTo: '/login', pathMatch: 'full' },
     ],
   },

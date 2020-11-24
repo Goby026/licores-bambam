@@ -4,8 +4,12 @@
     padding: 1px !important;
 } */
 
+.cuerpo{
+  font-size: 12px !important;
+}
+
 body{
-    background: whitesmoke !important;
+    /* background: whitesmoke !important; */
 }
 
 table tr td, th{
@@ -13,5 +17,9 @@ table tr td, th{
 }
 
 input{
-    padding: 0.2em !important;
+    /* padding: 0.3em !important; */
+}
+
+.btn {
+  padding: 2px 5px 2px 5px !important;
 }

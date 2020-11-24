@@ -15,6 +15,10 @@ export class ArticulosComponent implements OnInit {
   formulario: boolean = false;
   modificar: boolean = false;
 
+  // Pagination parameters.
+  p: Number = 1;
+  count: Number = 5;
+
   constructor(private artService: ArticulosService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
