@@ -30,7 +30,7 @@ export class BreadcrumbsComponent implements OnDestroy {
       filter( event => event instanceof ActivationEnd ),
       filter( (event:ActivationEnd) => event.snapshot.firstChild === null ),
       map( (event:ActivationEnd) => event.snapshot.data )
-    );    
+    );
   }
 
 }

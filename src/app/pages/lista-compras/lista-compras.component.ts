@@ -44,33 +44,33 @@ export class ListaComprasComponent implements OnInit {
     }
 
     if(item == 1){
-      this.porProveedor = true;
-      this.porProducto = false;
-      this.porRango = false;
-      this.porFecha = false;
-    }
-
-    if(item == 2){
       this.porProveedor = false;
       this.porProducto = true;
       this.porRango = false;
       this.porFecha = false;
     }
 
-    if(item == 3){
+    if(item == 2){
       this.porProveedor = false;
       this.porProducto = false;
       this.porRango = true;
       this.porFecha = false;
     }
 
-    if(item == 4){
+    if(item == 3){
       this.porProveedor = false;
       this.porProducto = false;
       this.porRango = false;
       this.porFecha = true;
     }
 
+  }
+
+  buscarProducto(param){
+    this.prodToCompra.findAll(param)
+    .subscribe( (resp:any)=>{
+      this.prodToCompras = resp.compras;
+    }, err => console.error('[ERROR]->', err) );
   }
 
   buscar(fecha: Date){

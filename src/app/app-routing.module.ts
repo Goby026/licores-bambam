@@ -18,6 +18,7 @@ import { ErrorPageComponent } from "./shared/error-page/error-page.component";
 import { KardexComponent } from './pages/kardex/kardex.component';
 import { ListaMovimientosComponent } from './pages/lista-movimientos/lista-movimientos.component';
 import { EmpresaComponent } from './pages/empresa/empresa.component';
+import { OrdenCompraComponent } from './pages/orden-compra/orden-compra.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,7 @@ const routes: Routes = [
       { path: "kardex", component: KardexComponent, data: { titulo: 'Kardex' } },
       { path: "lista-movimientos", component: ListaMovimientosComponent, data: { titulo: 'Lista de movimientos' } },
       { path: "empresa", component: EmpresaComponent, data: { titulo: 'Empresa' } },
+      { path: "orden-compra", component: OrdenCompraComponent, data: { titulo: 'Orden de compra' } },
       { path: '',   redirectTo: '/login', pathMatch: 'full' },
     ],
   },
@@ -47,7 +49,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

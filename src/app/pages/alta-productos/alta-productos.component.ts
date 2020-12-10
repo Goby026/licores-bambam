@@ -20,18 +20,18 @@ export class AltaProductosComponent implements OnInit {
   editar: boolean = false;
   articulos: Articulo[] = [];
   categorias: Categoria[] = [];
-  artAdd: Articulo[] = [];  
+  artAdd: Articulo[] = [];
+  palabra: string = '';
 
   constructor(
-    private productoService: ProductosService, 
-    private artService: ArticulosService, 
-    private categoriaService: CategoriasService, 
+    private productoService: ProductosService,
+    private artService: ArticulosService,
+    private categoriaService: CategoriasService,
     private fb: FormBuilder,
     private rutaActiva: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.crearFormulario();
-    this.listarArticulos();
     this.listarCategorias();
     this.validarEditar(this.rutaActiva.snapshot.params);
   }
@@ -52,13 +52,13 @@ export class AltaProductosComponent implements OnInit {
     });
   }
 
-  // validar y cargar cita
+  // validar y cargar
   validarEditar(param){
     if(param.id > 0){
       this.editar = true;
       this.productoService.getOne(param.id)
       .subscribe( (resp: any) => {
-        
+
         this.productoForm.setValue({
           nombre: resp.nombre,
           unidad: resp.unidad,
@@ -75,18 +75,25 @@ export class AltaProductosComponent implements OnInit {
 
         this.artAdd = resp.articulos;
 
-        console.log('ID DE CATEGORIA', resp.categoria.id);
-        console.log('articulos', resp.articulos);
+        // console.log('ID DE CATEGORIA', resp.categoria.id);
+        // console.log('articulos', resp.articulos);
         this.editar = true;
       });
     }
   }
 
-  listarArticulos() {
-    this.artService.read()
-      .subscribe((resp: any) => {
-        this.articulos = resp.articulos;
-      });
+  buscarArticulo(){
+
+    if(this.palabra.trim().length <= 0){
+      this.articulos = [];
+      return;
+    }
+
+    this.artService.search( this.palabra )
+    .subscribe( (resp: any)=>{
+      console.log(resp);
+      this.articulos = resp;
+    }, err => console.error('[ERROR]->', err) );
   }
 
   listarCategorias(){
@@ -182,7 +189,7 @@ export class AltaProductosComponent implements OnInit {
 
     } );
   }
-  
+
   quitarArticulo(item: any){
     let i = this.artAdd.indexOf(item);
     if ( i !== -1 ) {

@@ -2,41 +2,52 @@
     'bg-danger': tipoMovimiento == 2}">
   <div class="card-header p-2 text-center">
     <div class="d-flex flex-row" *ngIf="tipoMovimiento == 1; else elseBlock">
-      <h3 class="ml-3">INGRESOS</h3>
-      <button class="btn btn-secondary ml-auto" (click)="form = !form">Nuevo Ingreso</button>
+      <h3 class="ml-3 text-light">INGRESOS</h3>
     </div>
     <ng-template #elseBlock>
       <div class="d-flex flex-row">
-        <h3 class="ml-3">SALIDAS</h3>
-        <button class="btn btn-secondary ml-auto" (click)="form = !form">Nueva Salida</button>
+        <h3 class="ml-3 text-light">SALIDAS</h3>
       </div>
     </ng-template>
 
   </div>
-  <div class="card-body bg-white text-dark table-responsive p-1">
-    <form *ngIf="form" (ngSubmit)="registrar()">
-      <!-- campo autocomplete -->
-      <div class="ng-autocomplete" style="width: 100%;">
-        <ng-autocomplete
-            class="ml-2"
-            [data]="productos"
-            [placeHolder]="placeholder"
-            [searchKeyword]="keyword"
-            (selected)='selectEvent($event)'
-            (inputChanged)='onChangeSearch($event)'
-            (inputFocused)='onFocused($event)'
-            [itemTemplate]="itemTemplate"
-            [notFoundTemplate]="notFoundTemplate"
-            #auto>
-        </ng-autocomplete>
-        <ng-template #itemTemplate let-item>
-          <a [innerHTML]="item.nombre"></a>
-        </ng-template>
-
-        <ng-template #notFoundTemplate let-notFound>
-          <div [innerHTML]="noPro"></div>
-        </ng-template>
+  <div class="card-body bg-white text-dark table-responsive p-2">
+    <form (ngSubmit)="registrar()">
+      <!-- fecha -->
+      <div class="form-group row mt-2">
+        <label class="col-sm-2 col-form-label" for="fecha">Fecha</label>
+        <div class="col-sm-10">
+          <input type="date" class="form-control" id="fecha">
+        </div>
       </div>
+      <!-- producto -->
+      <div class="form-group row mt-2">
+        <label class="col-sm-2 col-form-label" for="producto">Producto</label>
+        <div class="col-sm-10">
+          <!-- campo autocomplete -->
+          <div class="ng-autocomplete" style="width: 100%;">
+            <ng-autocomplete
+                [data]="productos"
+                [searchKeyword]="keyword"
+                (selected)="selectEvent($event); clearPanel($event)"
+                (inputChanged)="onChangeSearch($event)"
+                (inputFocused)="onFocused($event)"
+                [itemTemplate]="itemTemplate"
+                [notFoundTemplate]="notFoundTemplate"
+                #auto>
+            </ng-autocomplete>
+            <ng-template #itemTemplate let-item>
+              <a [innerHTML]="item.nombre"></a>
+            </ng-template>
+
+            <ng-template #notFoundTemplate let-notFound>
+              <div [innerHTML]="noPro"></div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+
+
       <table class="table mt-3 w-100">
         <thead>
           <tr>
@@ -78,39 +89,13 @@
       </div>
 
       <div *ngIf="tipoMovimiento == 1; else btnSalida">
-        <button type="submit" class="btn btn-primary btn-block" (click)="tipoMovimiento = 1">Dar ingreso</button>
+        <button type="submit" class="btn btn-info btn-block" (click)="tipoMovimiento = 1">Dar ingreso</button>
       </div>
       <ng-template #btnSalida>
-        <button type="submit" class="btn btn-warning btn-block" (click)="tipoMovimiento = 2">Dar salida</button>
+        <button type="submit" class="btn btn-info btn-block" (click)="tipoMovimiento = 2">Dar salida</button>
       </ng-template>
       <input type="hidden" />
 
     </form>
-  </div>
-  <div class="card-footer bg-info text-dark p-1  table-responsive">
-    <div *ngIf="tipoMovimiento == 1; else ultimos">
-      <h5 class="card-title">Últimos ingresos</h5>
-    </div>
-    <ng-template #ultimos>
-      <h5 class="card-title">Últimas salidas</h5>
-    </ng-template>
-    <table class="table table-bordered bg-light w-100">
-      <thead>
-        <tr>
-          <th>Producto</th>
-          <th>Cantidad</th>
-          <th>Importe</th>
-          <th>Subtotal</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Cerveza Cusqueña</td>
-          <td>2</td>
-          <td>3</td>
-          <td>4</td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ProductosService } from 'src/app/services/productos.service';
 import { ProductoToMovimientoService } from 'src/app/services/producto-to-movimiento.service';
 import * as moment from 'moment';
@@ -13,6 +13,8 @@ import Swal from 'sweetalert2';
 export class MovFormComponent implements OnInit {
 
   @ViewChild('auto') auto;
+
+  @Output() registrado = new EventEmitter<boolean>();
 
   keyword = 'nombre';
   noPro = 'no se encuentra';
@@ -36,8 +38,7 @@ export class MovFormComponent implements OnInit {
   listarProductos(){
     this.productos = this.prodService.read()
     .subscribe( (resp: any)=>{
-      console.log(resp);
-      this.productos = resp.productos;
+      this.productos = resp;
     }, err=> console.error('[ERROR]', err) );
   }
 
@@ -58,8 +59,10 @@ export class MovFormComponent implements OnInit {
 
     this.prodToMov.create(this.addProductos, this.movimiento)
     .subscribe( (resp)=>{
-      console.log(resp);
+      this.registrado.emit(true);
     }, err => console.error('[ERROR]', err) );
+
+
 
   }
 
@@ -87,7 +90,6 @@ export class MovFormComponent implements OnInit {
   }
 
   selectEvent(item): void {
-    console.log("..................");
     let p: any = {
       productoId: item.id,
       nombre: item.nombre,
@@ -95,7 +97,6 @@ export class MovFormComponent implements OnInit {
       importe: 0.00,
       subtotal: 0.00
     }
-    console.log(p);
     this.addProductos.push(p);
   }
 

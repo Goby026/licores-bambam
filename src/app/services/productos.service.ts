@@ -44,9 +44,8 @@ export class ProductosService {
     return this.http.get(`${this.url}/productos/${id}`);
   }
 
+  // buscar producto para venta o compra
   find(texto: string) {
-    // return this.http.get(`${this.url}/productos/buscarProducto/${texto}`);
-
     return this.http.get(`${this.url}/productos/buscarProducto/${texto}`)
     .pipe(
       map( (resp:any) => {
@@ -61,5 +60,37 @@ export class ProductosService {
         }
       })
     );
+  }
+
+  // buscar producto por nombre
+  findAll(texto: string) {
+    return this.http.get(`${this.url}/productos/buscarProducto/${texto}`)
+    .pipe(
+      map( (resp:any) => {
+        if(resp){
+          return resp.productos.filter( (item)=>{
+            return item;
+          });
+        }else{
+          return [];
+        }
+      })
+    );
+  }
+
+  findByCategory(id: number){
+
+    return this.http.get(`${this.url}/productos/buscarProducto/cat/${id}`).pipe(
+      map( (resp:any) => {
+        if(resp){
+          return resp.productos.filter( (item)=>{
+            return item;
+          });
+        }else{
+          return [];
+        }
+      })
+    );
+
   }
 }

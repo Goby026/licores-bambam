@@ -1,8 +1,10 @@
 <div class="animate__animated animate__fadeIn animate__delay-0.5s">
   <div class="row">
-    <div class="col-md-12">
-      <button class="btn btn-info">REGISTRAR COMPRA</button>
-      <button class="btn btn-info">REGISTRAR ORDEN DE COMPRA</button>
+    <div class="col-md-6">
+      <button class="btn btn-info w-75">REGISTRAR COMPRA</button>
+    </div>
+    <div class="col-md-6">
+      <button class="btn btn-info w-75" routerLink="/orden-compra">REGISTRAR ORDEN DE COMPRA</button>
     </div>
   </div>
   <div class="row">
@@ -50,13 +52,16 @@
   <hr>
   <div class="row" style="min-height: 420px;">
     <div class="col-md-4 table-responsive">
-      <div class="input-group mb-3">
+      <!-- BUSCADOR DE PRODCUTOS -->
+      <!-- <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="Buscar producto" [(ngModel)]="texto"
           (keyup.enter)="listarProductos()">
         <div class="input-group-append">
-          <button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+          <button class="btn btn-primary" type="button"><i class="fa fa-search" (click)="listarProductos()"></i></button>
         </div>
-      </div>
+
+      </div> -->
+      <app-buscador-productos (producto)="agregarProducto($event)"></app-buscador-productos>
       <table class="table mt-2">
         <!-- <thead class="thead-light">
           <tr>
@@ -91,17 +96,17 @@
         </thead>
         <tbody>
           <tr *ngFor="let added of addProductos">
-            <th scope="row">{{ added.id }}</th>
-            <td>{{ added.cantidad }}</td>
-            <td>{{ added.nombre }}</td>
-            <td><input type="text" class="form-control" [value]="added.precioCompra" [(ngModel)]="added.precioCompra" size="2"></td>
-            <td>
+            <td class="align-middle">{{ added.id }}</td>
+            <td class="align-middle">{{ added.unidades }}</td>
+            <td class="align-middle">{{ added.nombre }}</td>
+            <td class="align-middle"><input type="text" class="form-control" [value]="added.precioCompra" [(ngModel)]="added.precioCompra" size="2"></td>
+            <td class="align-middle">
               <input type="text" class="form-control" [value]="added.dcto" [(ngModel)]="added.dcto" size="2" (keyup)="descuento(added)">
             </td>
-            <td>
+            <td class="align-middle">
               <input type="text" class="form-control" [value]="added.subtotal" [(ngModel)]="added.subtotal" size="2" (keyup)="operar(added)">
             </td>
-            <td class="text-center">
+            <td class="text-center align-middle">
               <button class="btn btn-danger btn-sm" (click)="quitarProducto(added)">
                 <i class="fa fa-trash"></i>
               </button>

@@ -15,37 +15,23 @@
     <div class="col-md-10">
       <select #mySelect id="" class="form-control" (change)="tipoBusqueda(mySelect.value)">
         <option value="0">-------</option>
-        <option value="1">POR PROVEEDOR</option>
-        <option value="2">POR PRODUCTO</option>
-        <option value="3">POR RANGO DE FECHAS</option>
-        <option value="4">POR FECHA UNICA</option>
+        <option value="1">POR PRODUCTO</option>
+        <option value="2">POR RANGO DE FECHAS</option>
+        <option value="3">POR FECHA UNICA</option>
       </select>
-    </div>    
-  </div>
-  <div class="row mt-3" *ngIf="porProveedor">
-    <div class="col-md-2"></div>
-    <div class="col-md-2">
-      <label for="">Proveedor</label>
-    </div>
-    <div class="col-md-8">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Nombre de proveedor">
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
-        </div>
-      </div>
     </div>
   </div>
+
   <div class="row mt-3" *ngIf="porProducto">
     <div class="col-md-2"></div>
     <div class="col-md-2">
-      <label for="">Producto</label>
+      <label for="producto">Producto</label>
     </div>
     <div class="col-md-8">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Nombre de producto">
+        <input type="text" class="form-control" placeholder="Nombre de producto" id="producto" #prod (keyup.enter)="buscarProducto(prod.value)">
         <div class="input-group-append">
-          <button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+          <button class="btn btn-primary" type="button"><i class="fa fa-search" (click)="buscarProducto(prod.value)"></i></button>
         </div>
       </div>
     </div>
@@ -59,10 +45,10 @@
       <input type="date" class="form-control" id="desde" #fechaI>
     </div>
     <div class="col-md-1">
-      <label for="">Hasta</label>
+      <label for="hasta">Hasta</label>
     </div>
     <div class="col-md-3">
-      <input type="date" class="form-control" #fechaF>
+      <input type="date" class="form-control" #fechaF id="hasta">
     </div>
     <div class="col-md-2">
       <button (click)="buscarPorRango(fechaI.value, fechaF.value)" class="btn btn-success btn-block">Mostrar compras</button>
@@ -82,7 +68,7 @@
       <button (click)="buscar(fecha.value)" class="btn btn-success btn-block">Mostrar compras</button>
     </div>
   </div>
-  
+
   <div class="row">
     <div class="col-md-12 table-responsive mt-4" style="height: 50vh !important; overflow: scroll;">
       <table class="table table-bordered">
@@ -112,7 +98,7 @@
       <h3 class="p-2 mr-5">TOTAL: {{ total }}</h3>
     </div>
   </div>
-  
+
   <!-- botones -->
   <div class="row mt-4">
     <div class="col-md-2"><button class="btn btn-danger btn-block">Cancelar</button></div>

@@ -11,15 +11,17 @@
   <hr>
   <div class="row p-2" style="min-height: 420px;">
     <div class="col-md-4 table-responsive">
-      <div class="input-group mb-3">
-        <!-- BUSCAR PRODUCTO -->
+      <!-- BUSCAR PRODUCTO -->
+      <!-- <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="Buscar producto" [(ngModel)]="texto"
           (keyup.enter)="listarProductos()">
         <div class="input-group-append">
           <button class="btn btn-primary" type="button" (click)="listarProductos()"><i class="fa fa-search"
               aria-hidden="true"></i></button>
         </div>
-      </div>
+      </div> -->
+
+      <app-buscador-productos (producto)="agregarProducto($event)"></app-buscador-productos>
       <!-- TABLA DE PRODUCTOS AGREGADOS PARA VENTA -->
       <table class="table mt-2">
         <!-- <thead class="thead-light">

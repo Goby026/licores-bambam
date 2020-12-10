@@ -29,6 +29,14 @@ import { MovFormComponent } from './pages/movimientos/mov-form.component';
 import { BreadcrumbsComponent } from './shared/breadcrumbs/breadcrumbs.component';
 import { ListaMovimientosComponent } from './pages/lista-movimientos/lista-movimientos.component';
 import { EmpresaComponent } from './pages/empresa/empresa.component';
+import { OrdenCompraComponent } from './pages/orden-compra/orden-compra.component';
+import { BuscadorProductosComponent } from './shared/buscador-productos/buscador-productos.component';
+
+import { PdfMakeWrapper } from 'pdfmake-wrapper';
+import pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
+
+// Set the fonts to use
+PdfMakeWrapper.setFonts(pdfFonts);
 
 @NgModule({
   declarations: [
@@ -52,7 +60,9 @@ import { EmpresaComponent } from './pages/empresa/empresa.component';
     MovFormComponent,
     BreadcrumbsComponent,
     ListaMovimientosComponent,
-    EmpresaComponent
+    EmpresaComponent,
+    OrdenCompraComponent,
+    BuscadorProductosComponent
   ],
   imports: [
     BrowserModule,

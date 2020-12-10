@@ -28,4 +28,8 @@ export class ProductoToCompraService {
   delete(){
 
   }
+
+  findAll(prod: string){
+    return this.http.get(`${this.url}/prod-compra/buscarCompras/${prod}`);
+  }
 }

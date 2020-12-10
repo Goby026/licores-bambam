@@ -9,17 +9,52 @@
     </div>
   </div>
 
-  <div class="row mt-2">
+  <div class="row mt-2" style="min-height: 520px !important;">
     <div class="col-md-6">
-      <app-mov-form *ngIf="nuevoIngreso" tipoMovimiento=1></app-mov-form>
+      <app-mov-form *ngIf="nuevoIngreso" tipoMovimiento=1 (registrado)="actualizar($event)"></app-mov-form>
     </div>
     <div class="col-md-6">
       <app-mov-form *ngIf="nuevaSalida" tipoMovimiento=2></app-mov-form>
     </div>
   </div>
 
-  <button class="btn btn-info">Registrar ingreso</button>
-  <button class="btn btn-info">Registrar salida</button>
+  <div class="row mt-2 bg-secondary">
+    <div class="col-md-12">
+      <h5 class="card-title">Últimos movimientos</h5>
+      <table class="table bg-light w-100">
+        <thead class="bg-primary text-light">
+          <tr>
+            <th>Fecha</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Importe</th>
+            <th>Subtotal</th>
+            <th>Tipo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ultimo of ultimosMovimientos">
+            <td>{{ ultimo.movimiento.fecha }}</td>
+            <td>{{ ultimo.producto.nombre }}</td>
+            <td>{{ ultimo.cantidad }}</td>
+            <td>{{ ultimo.importe }}</td>
+            <td>{{ ultimo.subtotal }}</td>
+            <td>
+              <div *ngIf="ultimo.movimiento.tipoMovimiento == 1; else salida">
+                <span class="badge badge-success w-100">Ingreso</span>
+              </div>
+              <ng-template #salida>
+                <span class="badge badge-danger w-100">Salida</span>
+              </ng-template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- <button class="btn btn-info">Registrar ingreso</button>
+  <button class="btn btn-info">Registrar salida</button> -->
 
   <button class="btn btn-info" routerLink="/kardex">KARDEX</button>
   <button class="btn btn-warning" routerLink="/lista-movimientos">Registro de movimientos</button>

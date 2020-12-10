@@ -10,12 +10,16 @@ export class ProductoToMovimientoService {
   private url = GlobalConstants.apiUrl;
 
   constructor( private http: HttpClient ) { }
-  
+
   create(addProductos: any, movimiento: any){
     return this.http.post(`${ this.url }/prod-movimiento/new`, {addProductos, movimiento})
   }
 
-  read(){}
+  read( opc?: number ){
+
+    return this.http.get(`${this.url}/prod-movimiento/${opc}`);
+
+  }
 
   update(){}
 

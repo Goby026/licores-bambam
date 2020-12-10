@@ -1,0 +1,28 @@
+<!-- BUSCAR PRODUCTO -->
+<div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Buscar producto" (keyup.enter)="listarProductos(prod.value)"
+    #prod>
+  <div class="input-group-append">
+    <button class="btn btn-primary" type="button" (click)="listarProductos(prod.value)"><i class="fa fa-search"
+        aria-hidden="true"></i></button>
+  </div>
+</div>
+<!-- TABLA DE PRODUCTOS BUSCADOS PARA VENTA -->
+<table class="table mt-2">
+  <!-- <thead class="thead-light">
+    <tr>
+      <th scope="col">Cod</th>
+      <th scope="col">Cantidad</th>
+      <th scope="col">Producto</th>
+      <th></th>
+    </tr>
+  </thead> -->
+  <tbody>
+    <tr *ngFor="let producto of productos">
+      <th class="align-middle" scope="row">{{ producto.id }}</th>
+      <td class="align-middle"> <input type="number" class="form-control p-0 text-center" [(ngModel)]="producto.unidades"></td>
+      <td class="align-middle">{{ producto.nombre }}</td>
+      <td class="align-middle"><button class="btn btn-success btn-sm" (click)="enviarProducto(producto)">+</button></td>
+    </tr>
+  </tbody>
+</table>

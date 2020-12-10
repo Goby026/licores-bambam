@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MovimientosService } from 'src/app/services/movimientos.service';
+import { ProductoToMovimientoService } from 'src/app/services/producto-to-movimiento.service';
+
 
 @Component({
   selector: 'app-lista-movimientos',
@@ -10,14 +11,14 @@ export class ListaMovimientosComponent implements OnInit {
 
   public movimientos: any[] = [];
 
-  constructor( private movimientosService: MovimientosService ) { }
+  constructor( private prodToMovService: ProductoToMovimientoService ) { }
 
   ngOnInit(): void {
     this.listarMovimientos();
   }
 
   listarMovimientos(){
-    this.movimientosService.read()
+    this.prodToMovService.read(0)
     .subscribe( (resp: any)=>{
       console.log(resp);
       this.movimientos = resp.movimientos;

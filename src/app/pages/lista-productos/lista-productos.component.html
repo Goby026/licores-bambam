@@ -12,7 +12,8 @@
       <label for="desde">Ver por categoria</label>
     </div>
     <div class="col-md-2">
-      <select class="form-control">
+      <select class="form-control" (change)="filtrarCategoria(cate.value)" #cate>
+        <option value="0">-------</option>
         <option *ngFor="let cat of categorias" [value]="cat.id">{{ cat.nombre }}</option>
       </select>
     </div>
@@ -22,25 +23,25 @@
     <div class="col-md-2">
       <label for="">Ver por producto</label>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-8">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Buscar producto">
+        <input type="text" class="form-control" placeholder="Buscar producto" (keyup.enter)="filtrarProducto(prod.value)" #prod>
         <div class="input-group-append">
-          <button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+          <button class="btn btn-primary" type="button"><i class="fa fa-search" (click)="filtrarProducto(prod.value)"></i></button>
         </div>
       </div>
     </div>
 
-    <div class="col-md-2">
+    <div class="col-md-2 text-right">
       <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="chbHoy">
+        <input type="checkbox" class="custom-control-input" id="chbHoy" (change)="listarProductos(list.checked)" #list>
         <label class="custom-control-label" for="chbHoy">Ver todo</label>
       </div>
     </div>
 
-    <div class="col-md-2">
+    <!-- <div class="col-md-2">
       <button class="btn btn-success btn-block">Mostrar productos</button>
-    </div>
+    </div> -->
 
   </div>
 
@@ -50,15 +51,14 @@
       <table class="table table-bordered">
         <thead class="thead-light">
           <tr>
-            <th scope="col">Cod</th>
-            <th scope="col">Producto</th>
-            <th scope="col">Presentación</th>
-            <th scope="col">Cantidad</th>
-            <th scope="col">Categoria</th>
-            <th scope="col">Stock</th>
-            <th scope="col">Prec. Compra</th>
-            <th scope="col">Prec. Venta</th>
-            <th scope="col">Estado</th>
+            <th scope="col">COD</th>
+            <th scope="col">PRODUCTO</th>
+            <th scope="col">UNIDADES</th>
+            <th scope="col">CATEGORIA</th>
+            <th scope="col">STOCK</th>
+            <th scope="col">P. COMPRA</th>
+            <th scope="col">P. VENTA</th>
+            <th scope="col">ESTADO</th>
             <th colspan="2" scope="col">Acciones</th>
           </tr>
         </thead>
@@ -66,15 +66,17 @@
           <tr *ngFor="let producto of productos | paginate: { itemsPerPage: count, currentPage: p }">
             <th scope="row">{{ producto.id }}</th>
             <td>{{ producto.nombre }}</td>
-            <td>---</td>
             <td>{{ producto.cantidad }}</td>
             <td>{{ producto.categoria.nombre }}</td>
-            <td>---</td>
+            <td>{{ producto.stockReal }}</td>
             <td>{{ producto.precioCompra }}</td>
             <td>{{ producto.precioVenta }}</td>
             <td>ACTIVO</td>
-            <td><button class="btn btn-warning btn-sm" [routerLink]="['/altaProductos', producto.id]"><i
-                  class="fa fa-pencil" aria-hidden="true"></i> </button></td>
+            <td>
+              <button class="btn btn-warning btn-sm" [routerLink]="['/altaProductos', producto.id]"><i
+                  class="fa fa-pencil" aria-hidden="true"></i>
+              </button>
+            </td>
             <td><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> </button>
             </td>
           </tr>
@@ -91,7 +93,7 @@
   <div class="row mt-4">
     <div class="col-md-2"><button class="btn btn-danger btn-block">Cancelar</button></div>
     <div class="col-md-8"></div>
-    <div class="col-md-2"><button class="btn btn-primary btn-block">Imprimir lista</button></div>
+    <div class="col-md-2"><button class="btn btn-primary btn-block" (click)="crearPdf()">Imprimir lista</button></div>
   </div>
 
 </div>

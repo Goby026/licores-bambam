@@ -32,39 +32,13 @@ export class ComprasComponent implements OnInit {
     this.compra.fecha_compra = moment().format('YYYY-MM-DD');
   }
 
-  listarProductos(  ) {
-    this.productosService.find(this.texto)
-      .subscribe((resp: any) => {
-
-        this.productos = resp.productos.map( (item)=>{
-          item.unidades = item.cantidad;
-          item.cantidad = 1;
-          return item;
-        });
-
-      });
-  }
-
   agregarProducto(item: any) {
 
-    let producto: any = {
-      nombre: item.nombre,
-      unidad: item.unidad,
-      precioVenta: item.precioVenta,
-      precioCompra: item.precioCompra,
-      cantidad: item.cantidad,
-      unidades: item.unidades * item.cantidad,
-      stockMinimo: item.stockMinimo,
-      stockMaximo: item.stockMaximo,
-      stockReal: item.stockReal,
-      subtotal: item.cantidad * item.precioCompra,
-      dcto: 0.00,
-      id: item.id
-    }
+    item.dcto = 0.00;
 
-    this.calculos(producto);
+    this.calculos(item);
 
-    this.addProductos.push(producto);
+    this.addProductos.push(item);
 
   }
 
@@ -83,7 +57,7 @@ export class ComprasComponent implements OnInit {
   }
 
   leerProductos() {
-    
+
     this.compra.total = 0.00;
 
     this.addProductos.forEach((e) => {

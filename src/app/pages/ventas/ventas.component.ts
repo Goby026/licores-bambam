@@ -40,39 +40,11 @@ export class VentasComponent implements OnInit {
     // console.log(this.venta);
   }
 
-  listarProductos() {
-
-    if(this.texto.trim() == ''){
-      return;
-    }
-
-    this.productosService.find(this.texto)
-      .subscribe((resp: any) => {
-
-        this.productos = resp;
-
-      });
-  }
-
   agregarProducto(item: any) {
 
-    let producto: any = {
-      nombre: item.nombre,
-      unidad: item.unidad,
-      precioVenta: item.precioVenta,
-      precioCompra: item.precioCompra,
-      cantidad: item.cantidad,
-      unidades: item.unidades,
-      stockMinimo: item.stockMinimo,
-      stockMaximo: item.stockMaximo,
-      stockReal: item.stockReal,
-      subtotal: item.cantidad * item.precioVenta,
-      id: item.id
-    }
+    this.calculos(item);
 
-    this.calculos(producto);
-
-    this.addProductos.push(producto);
+    this.addProductos.push(item);
 
   }
 

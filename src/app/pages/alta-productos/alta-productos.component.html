@@ -4,29 +4,29 @@
       <h1>ALTA DE PRODUCTO</h1>
     </div>
     <div class="col-md-2">
-      <label for="btnAddArt" class="mr-2">Agregar articulo</label>
-      <button type="button" class="btn btn-secondary btn-circle" id="btnAddArt" (click)="addArticulo = true"><i
+      <!-- <label for="btnAddArt" class="mr-2">Agregar articulo</label>
+      <button type="button" class="btn btn-secondary btn-circle" id="btnAddArt"><i
           class="fa fa-plus" aria-hidden="true"></i>
-      </button>
+      </button> -->
     </div>
   </div>
   <hr>
-  <div class="row" *ngIf="addArticulo">
+  <div class="row" *ngIf="addArticulo" style="min-height: 250px;">
     <div class="col-md-4 table-responsive">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Buscar producto">
+        <input type="text" class="form-control" placeholder="Buscar artículo" [(ngModel)]="palabra" (keyup.enter)="buscarArticulo()">
         <div class="input-group-append">
-          <button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+          <button class="btn btn-primary" type="button"><i class="fa fa-search" (click)="buscarArticulo()"></i></button>
         </div>
       </div>
       <table class="table mt-2">
-        <thead class="thead-light">
+        <!-- <thead class="thead-light">
           <tr>
             <th scope="col">Cod</th>
             <th scope="col">Articulo</th>
             <th></th>
           </tr>
-        </thead>
+        </thead> -->
         <tbody>
           <tr *ngFor="let art of articulos">
             <th scope="row">{{ art.id }}</th>
@@ -38,7 +38,7 @@
 
     </div>
     <div class="col-md-8">
-      <table class="table table-bordered">
+      <table class="table">
         <thead class="thead-light">
           <tr>
             <th scope="col">Cod</th>
@@ -63,9 +63,9 @@
         </tbody>
       </table>
     </div>
-
   </div>
   <hr *ngIf="addArticulo">
+
   <div class="row">
     <div class="col-md-12">
       <form [formGroup]="productoForm" (ngSubmit)="registrar()">
