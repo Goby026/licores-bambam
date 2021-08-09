@@ -26,7 +26,7 @@ export class ProductosService {
     .pipe(
       map( (resp:any) => {
         if(resp){
-          return resp.productos.filter( (item)=>{
+          return resp.filter( (item)=>{
             return item;
           });
         }else{
@@ -68,7 +68,7 @@ export class ProductosService {
     .pipe(
       map( (resp:any) => {
         if(resp){
-          return resp.productos.filter( (item)=>{
+          return resp.filter( (item)=>{
             return item;
           });
         }else{

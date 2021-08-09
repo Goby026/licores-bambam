@@ -34,7 +34,8 @@ export class CategoriasComponent implements OnInit {
   listarCategorias(){
     this.categoriaService.read()
     .subscribe( (resp:any) => {
-      this.categorias = resp.categorias;
+      console.log(resp)
+      this.categorias = resp;
     });
   }
 
@@ -66,7 +67,7 @@ export class CategoriasComponent implements OnInit {
       id:cat.id
     });
 
-    console.log(this.categoriaForm.value);
+    this.formulario = true;
 
   }
 
@@ -80,6 +81,7 @@ export class CategoriasComponent implements OnInit {
     let categoria: Categoria = {
       nombre: this.categoriaForm.value.nombre,
       descripcion: this.categoriaForm.value.descripcion,
+      estado: this.categoriaForm.value.estado,
       id: this.categoriaForm.value.id
     }
 

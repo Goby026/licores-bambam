@@ -15,7 +15,7 @@ export class ArticulosService {
   constructor( private http: HttpClient ) { }
 
   create( articulo: Articulo ){
-    return this.http.post(`${this.url}/articulos/newArticulo`, articulo);
+    return this.http.post(`${this.url}/articulos`, articulo);
   }
 
   read(){
@@ -31,7 +31,7 @@ export class ArticulosService {
   }
 
   update( articulo: Articulo ){
-    return this.http.put(`${this.url}/articulos/${articulo.id}`, articulo);
+    return this.http.put(`${this.url}/articulos`, articulo);
   }
 
   delete( id: number ){

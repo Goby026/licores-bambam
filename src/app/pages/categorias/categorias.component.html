@@ -16,7 +16,6 @@
       <!-- TODO : este formulario debe aparecer cuando se agregue un nuevo articulo (btnAddCat) -->
       <form [formGroup]="categoriaForm" (ngSubmit)="registrar()" *ngIf="formulario">
         <input type="hidden" formControlName="id">
-        <input type="hidden" formControlName="estado">
         <div class="form-group">
           <label for="txtArticulo">Nombre</label>
           <input type="text" class="form-control" id="txtArticulo" formControlName="nombre">
@@ -26,6 +25,10 @@
           <!-- <input type="password" class="form-control" id="exampleInputPassword1"> -->
           <textarea rows="4" class="form-control" formControlName="descripcion"></textarea>
         </div>
+        <select class="form-select" aria-label="Default select example" formControlName="estado">
+          <option value="1">Habilitado</option>
+          <option value="0">Deshabilitado</option>
+        </select>
         <button type="button" class="btn btn-danger btn-block"
           (click)="resetear(); editarCategoria = false; formulario=false">Cancelar</button>
         <button type="button" class="btn btn-primary btn-block" (click)="resetear()">Nuevo Registro</button>

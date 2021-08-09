@@ -14,7 +14,7 @@ export class CategoriasService {
   constructor( private http: HttpClient ) { }
 
   create( categoria: Categoria ){
-    return this.http.post(`${this.url}/categorias/newCategoria`, categoria);
+    return this.http.post(`${this.url}/categorias`, categoria);
   }
 
   read(){
@@ -23,7 +23,7 @@ export class CategoriasService {
 
 
   update( categoria: Categoria ){
-    return this.http.put(`${this.url}/categorias/${categoria.id}`, categoria);
+    return this.http.put(`${this.url}/categorias`, categoria);
   }
 
 

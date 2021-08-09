@@ -38,7 +38,7 @@ export class ArticulosComponent implements OnInit {
   listarArticulos() {
     this.artService.read()
       .subscribe((resp: any) => {
-        this.articulos = resp.articulos;
+        this.articulos = resp;
       });
   }
 
@@ -56,16 +56,16 @@ export class ArticulosComponent implements OnInit {
 
     this.artService.create(articulo)
     .subscribe( (resp)=>{
-      console.log(resp);      
+      console.log(resp);
       this.listarArticulos();
       this.resetear();
     } );
 
-    
+
   }
 
   editar(articulo: Articulo){
-    
+
     this.articulosForm.setValue({
       nombre: articulo.nombre,
       descripcion: articulo.descripcion,
@@ -80,6 +80,7 @@ export class ArticulosComponent implements OnInit {
     let articulo: Articulo = {
       nombre: this.articulosForm.value.nombre,
       descripcion: this.articulosForm.value.descripcion,
+      estado: this.articulosForm.value.estado,
       id: this.articulosForm.value.id
     }
 
@@ -92,6 +93,7 @@ export class ArticulosComponent implements OnInit {
   }
 
   eliminar(id: number){
+
     const borrar = confirm('Desea eliminar el artículo');
     if(!borrar){
       return;

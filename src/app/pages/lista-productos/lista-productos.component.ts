@@ -30,6 +30,7 @@ export class ListaProductosComponent implements OnInit {
     if (val) {
       this.productosService.read()
         .subscribe((resp: any) => {
+          console.log('PRODUCTOS', resp);
           this.productos = resp;
         });
     } else {
@@ -40,7 +41,7 @@ export class ListaProductosComponent implements OnInit {
   listarCategorias() {
     this.categoriaService
       .read().subscribe((resp: any) => {
-        this.categorias = resp.categorias;
+        this.categorias = resp;
       });
   }
 
